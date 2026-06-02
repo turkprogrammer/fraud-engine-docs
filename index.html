@@ -1,0 +1,2847 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fraud Detection Engine — Антифрод система на Golang | Система обнаружения мошенничества API</title>
+    <meta name="description" content="Fraud Detection Engine — готовая к продакшену антифрод система на Golang. Real-time скоринг транзакций, ML Random Forest, 152-ФЗ compliance. API для e-commerce и финтех. 1000+ RPS, P95 <5ms.">
+    <meta name="keywords" content="антифрод система, система обнаружения мошенничества, fraud detection golang, антифрод golang, скоринг транзакций, fraud scoring api, golang api, real-time мошенничество, machine learning мошенничество, random forest golang, 152-ФЗ антифрод, e-commerce безопасность, финтех безопасность, payment fraud detection, транзакции мошенничество, multi-tenancy golang, SHAP explainability, production ready golang, антифрод решение, система безопасности платежей, обнаружение фрода, golang backend, high-load golang, microservices golang, postgresql redis golang">
+    <meta name="author" content="turkprogrammer">
+    <meta name="language" content="ru">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="revisit-after" content="3 days">
+    <link rel="canonical" href="https://turkprogrammer.github.io/fraud-engine/">
+
+    <!-- Yandex -->
+    <meta name="icb" content="true">
+    <meta name="geo" content="RU">
+    <meta name="geo.placename" content="Russia">
+    <meta name="geo.position" content="55.7558;37.6173">
+    <meta name="geo.region" content="RU-MOW">
+    <meta name="yandex-verification" content="">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Fraud Detection Engine — Антифрод система на Golang">
+    <meta property="og:description" content="Готовая к продакшену антифрод система на Go. Real-time скоринг, ML, 152-ФЗ. API для e-commerce и финтех.">
+    <meta property="og:url" content="https://turkprogrammer.github.io/fraud-engine/">
+    <meta property="og:site_name" content="Fraud Detection Engine — Антифрод API">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://turkprogrammer.github.io/fraud-engine/favicon.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Fraud Detection Engine — Real-time Anti-Fraud API для Go">
+    <meta property="article:author" content="https://github.com/turkprogrammer">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fraud Detection Engine — Антифрод система Golang">
+    <meta name="twitter:description" content="Антифрод система на Go. Real-time скоринг, ML, 152-ФЗ compliance. 1000+ RPS.">
+    <meta name="twitter:creator" content="@turkprogrammer">
+    <meta name="twitter:image" content="https://turkprogrammer.github.io/fraud-engine/favicon.svg">
+
+    <!-- Mobile -->
+    <meta name="theme-color" content="#0a0f18">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Fraud Detection Engine",
+        "alternateName": ["fraud-engine", "Anti-Fraud API", "Антифрод система", "Система обнаружения мошенничества"],
+        "description": "Антифрод система на Golang для real-time скоринга транзакций. Production-ready API с ML Random Forest, Multi-tenancy, SHAP-объяснимостью, 152-ФЗ compliance.",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Cross-platform (Linux, macOS, Windows)",
+        "url": "https://turkprogrammer.github.io/fraud-engine/",
+        "downloadUrl": "https://github.com/turkprogrammer/fraud-engine/releases",
+        "installUrl": "https://github.com/turkprogrammer/fraud-engine#быстрый-старт",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/OnlineOnly"
+        },
+        "softwareHelp": {
+            "@type": "HelpDocument",
+            "url": "https://github.com/turkprogrammer/fraud-engine/blob/main/README.md",
+            "name": "Документация Fraud Detection Engine"
+        },
+        "programmingLanguage": {
+            "@type": "ComputerLanguage",
+            "name": "Go",
+            "url": "https://go.dev/"
+        },
+        "runtimePlatform": "Go 1.25+",
+        "featureList": [
+            "Real-time transaction scoring",
+            "Random Forest ML scoring",
+            "Heuristic fallback scoring",
+            "Multi-tenancy (v1.2)",
+            "SHAP-like feature explanations (v2.0)",
+            "Platt scaling probability calibration",
+            "Template modes for testing",
+            "Redis idempotency cache",
+            "PostgreSQL persistence",
+            "Async worker pool",
+            "PII masking (152-ФЗ)",
+            "TLS/HTTPS with Let's Encrypt",
+            "Rate limiting (70,000 req/min)",
+            "Prometheus metrics",
+            "Grafana dashboards",
+            "Health checks",
+            "Hot-reload ML models",
+            "Dynamic risk rules (YAML)",
+            "Tenant-scoped model isolation",
+            "155+ tests passing"
+        ],
+        "screenshot": "https://turkprogrammer.github.io/fraud-engine/",
+        "dateCreated": "2024-01-01",
+        "dateModified": "2026-06-02",
+        "datePublished": "2024-01-01",
+        "author": {
+            "@type": "Person",
+            "name": "Юсупов Роберт Рахимович",
+            "alternateName": "turkprogrammer",
+            "url": "https://github.com/turkprogrammer",
+            "jobTitle": "Senior Backend Engineer"
+        },
+        "keywords": "антифрод система, система обнаружения мошенничества, fraud detection golang, антифрод golang, скоринг транзакций, golang api, 152-ФЗ, machine learning, random forest, e-commerce безопасность, финтех",
+        "inLanguage": "ru",
+        "isAccessibleForFree": true,
+        "license": "https://opensource.org/licenses/Apache-2.0",
+        "softwareVersion": "6.2",
+        "applicationSubCategory": "Fraud Detection, Payment Security, Risk Scoring",
+        "memoryRequirements": "<1GB RAM",
+        "processorRequirements": "x86_64, ARM64",
+        "storageRequirements": "PostgreSQL 16, Redis 7"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #0a0f18;
+            --bg-panel: #0f1520;
+            --bg-card: #121824;
+            --text-main: #c5cdd9;
+            --text-muted: #4a5568;
+            --text-bright: #e2e8f0;
+            --accent-cyan: #00e5ff;
+            --accent-green: #00e676;
+            --accent-red: #ff5252;
+            --accent-orange: #ff9100;
+            --accent-purple: #b388ff;
+            --accent-yellow: #ffd740;
+            --accent-emerald: #10b981;
+            --grid-line: rgba(255, 255, 255, 0.06);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --glow-cyan: 0 0 20px rgba(0, 229, 255, 0.15);
+            --glow-green: 0 0 20px rgba(0, 230, 118, 0.15);
+            --glow-red: 0 0 20px rgba(255, 82, 82, 0.15);
+            --glow-emerald: 0 0 20px rgba(16, 185, 129, 0.15);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-mono);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 999; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .scanline {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 998;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.03) 2px,
+                rgba(0, 0, 0, 0.03) 4px
+            );
+        }
+
+        /* Scroll progress */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+            z-index: 10000; width: 0%; transition: width 0.1s linear;
+        }
+
+        /* Mouse glow */
+        .mouse-glow {
+            position: fixed; width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.06) 0%, transparent 70%);
+            pointer-events: none; z-index: 1; transform: translate(-50%, -50%);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        body:hover .mouse-glow { opacity: 1; }
+
+        .container {
+            max-width: 1200px; margin: 0 auto; padding: 2rem;
+            display: grid; gap: 3rem; position: relative; z-index: 2;
+        }
+
+        /* Header */
+        header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            border-bottom: 1px solid var(--grid-line); padding-bottom: 2rem;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 1rem; }
+
+        .logo-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-weight: 700; font-size: 1.4rem;
+            color: var(--bg-deep); box-shadow: var(--glow-red);
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: ''; position: absolute; inset: -3px; border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            opacity: 0.3; z-index: -1; filter: blur(8px);
+        }
+
+        h1 {
+            font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 700; line-height: 0.95; letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--accent-red), #fff 50%, var(--accent-orange));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 0.85rem; color: var(--accent-orange);
+            text-transform: uppercase; letter-spacing: 0.15em; margin-top: 0.75rem;
+            font-family: var(--font-mono);
+        }
+
+        .header-right { text-align: right; }
+        .version-badge {
+            display: inline-block; padding: 0.3rem 0.8rem;
+            border: 1px solid var(--accent-orange); color: var(--accent-orange);
+            font-size: 0.75rem; letter-spacing: 0.1em;
+            background: rgba(255, 145, 0, 0.05);
+        }
+
+        .github-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            margin-top: 0.75rem; color: var(--text-muted); text-decoration: none;
+            font-size: 0.85rem; transition: color 0.2s;
+        }
+        .github-link:hover { color: var(--accent-orange); }
+
+        /* Status badges */
+        .status-badges {
+            display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.25rem 0.6rem; font-size: 0.65rem; letter-spacing: 0.05em;
+            border: 1px solid var(--grid-line); color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge.production { border-color: var(--accent-green); color: var(--accent-green); background: rgba(0, 230, 118, 0.05); }
+        .badge.compliance { border-color: var(--accent-emerald); color: var(--accent-emerald); background: rgba(16, 185, 129, 0.05); }
+
+        /* Terminal Demo */
+        .terminal-demo {
+            background: var(--bg-panel);
+            border: 1px solid var(--grid-line);
+            position: relative;
+            overflow: visible;
+        }
+
+        .terminal-demo.is-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .terminal-demo.is-sticky .terminal-header {
+            position: sticky;
+            top: 0;
+            z-index: 101;
+            background: rgba(15, 21, 32, 0.98);
+            backdrop-filter: blur(12px);
+        }
+
+        /* Sticky mini-bar */
+        .terminal-sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 15, 24, 0.95);
+            border-top: 1px solid var(--grid-line);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .terminal-sticky-bar.visible {
+            transform: translateY(0);
+        }
+
+        .terminal-sticky-bar.hidden {
+            display: none;
+        }
+
+        .sticky-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .sticky-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .sticky-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .sticky-dot:nth-child(1) { background: var(--accent-red); }
+        .sticky-dot:nth-child(2) { background: var(--accent-yellow); }
+        .sticky-dot:nth-child(3) { background: var(--accent-green); }
+
+        .sticky-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .sticky-btn {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--grid-line);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sticky-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.1);
+        }
+
+        .sticky-btn.active {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.15);
+        }
+
+        .sticky-result {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .sticky-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .sticky-close:hover {
+            color: var(--accent-red);
+        }
+
+        @media (max-width: 768px) {
+            .terminal-sticky-bar {
+                flex-wrap: wrap;
+                padding: 10px 12px;
+            }
+            .sticky-controls { width: 100%; justify-content: center; }
+            .sticky-result { display: none; }
+        }
+
+        .terminal-demo::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+        }
+
+        .terminal-header {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.5rem; border-bottom: 1px solid var(--grid-line);
+            background: rgba(255, 145, 0, 0.02);
+        }
+
+        .terminal-dots { display: flex; gap: 6px; }
+        .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .terminal-dot:nth-child(1) { background: var(--accent-red); }
+        .terminal-dot:nth-child(2) { background: var(--accent-yellow); }
+        .terminal-dot:nth-child(3) { background: var(--accent-green); }
+
+        .terminal-title {
+            font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em;
+            flex: 1; text-align: center;
+        }
+
+        .demo-controls {
+            display: flex; gap: 4px;
+        }
+
+        .demo-btn {
+            padding: 4px 10px;
+            border: 1px solid var(--grid-line);
+            background: transparent;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+
+        .demo-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .demo-btn.active {
+            background: rgba(0, 229, 255, 0.15);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .footer-badges {
+            display: flex; gap: 6px;
+        }
+
+        .demo-stats {
+            display: flex; gap: 8px; align-items: center;
+            font-size: 0.7rem; color: var(--text-muted);
+        }
+
+        #demo-latency {
+            color: var(--accent-green);
+        }
+
+        .terminal-body {
+            padding: 1.5rem; font-size: 0.85rem; min-height: 360px;
+            position: relative;
+        }
+
+        .terminal-cmd {
+            color: var(--text-muted); margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .terminal-cmd .prompt { color: var(--accent-green); }
+        .terminal-cmd .cmd { color: var(--accent-cyan); }
+        .terminal-cmd .cursor {
+            display: inline-block; width: 8px; height: 1.1em;
+            background: var(--accent-cyan); animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* JSON Response Display */
+        .json-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--grid-line);
+            border-radius: 8px;
+            padding: 1.25rem;
+            font-size: 0.8rem;
+            line-height: 1.7;
+            animation: fadeIn 0.3s ease forwards;
+            opacity: 0;
+            overflow-x: auto;
+        }
+
+        .json-block:nth-child(1) { animation-delay: 0.1s; }
+        .json-block:nth-child(2) { animation-delay: 0.4s; }
+        .json-block:nth-child(3) { animation-delay: 0.7s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .json-key { color: var(--accent-cyan); }
+        .json-string { color: var(--accent-green); }
+        .json-number { color: var(--accent-orange); }
+        .json-bool { color: var(--accent-purple); }
+        .json-null { color: var(--text-muted); }
+        .json-comment { color: var(--text-muted); font-style: italic; }
+
+        .decision-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 0.35rem 0.8rem;
+            font-weight: 700; font-size: 0.72rem; text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1.5px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .decision-badge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .decision-badge:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .decision-badge:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .decision-badge.allow {
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--accent-green);
+            border-color: rgba(0, 230, 118, 0.3);
+        }
+        .decision-badge.allow::before {
+            background: radial-gradient(circle at center, rgba(0, 230, 118, 0.3), transparent 70%);
+        }
+        .decision-badge.allow:hover {
+            background: rgba(0, 230, 118, 0.2);
+            border-color: rgba(0, 230, 118, 0.6);
+            box-shadow: 0 4px 16px rgba(0, 230, 118, 0.3), 0 0 20px rgba(0, 230, 118, 0.2);
+        }
+        .decision-badge.allow:hover::before { opacity: 1; }
+        .decision-badge.allow.active {
+            background: rgba(0, 230, 118, 0.25);
+            border-color: rgba(0, 230, 118, 0.8);
+        }
+
+        .decision-badge.review {
+            background: rgba(255, 215, 64, 0.1);
+            color: var(--accent-yellow);
+            border-color: rgba(255, 215, 64, 0.3);
+        }
+        .decision-badge.review::before {
+            background: radial-gradient(circle at center, rgba(255, 215, 64, 0.3), transparent 70%);
+        }
+        .decision-badge.review:hover {
+            background: rgba(255, 215, 64, 0.2);
+            border-color: rgba(255, 215, 64, 0.6);
+            box-shadow: 0 4px 16px rgba(255, 215, 64, 0.3), 0 0 20px rgba(255, 215, 64, 0.2);
+        }
+        .decision-badge.review:hover::before { opacity: 1; }
+        .decision-badge.review.active {
+            background: rgba(255, 215, 64, 0.25);
+            border-color: rgba(255, 215, 64, 0.8);
+        }
+
+        .decision-badge.block {
+            background: rgba(255, 82, 82, 0.1);
+            color: var(--accent-red);
+            border-color: rgba(255, 82, 82, 0.3);
+        }
+        .decision-badge.block::before {
+            background: radial-gradient(circle at center, rgba(255, 82, 82, 0.3), transparent 70%);
+        }
+        .decision-badge.block:hover {
+            background: rgba(255, 82, 82, 0.2);
+            border-color: rgba(255, 82, 82, 0.6);
+            box-shadow: 0 4px 16px rgba(255, 82, 82, 0.3), 0 0 20px rgba(255, 82, 82, 0.2);
+        }
+        .decision-badge.block:hover::before { opacity: 1; }
+        .decision-badge.block.active {
+            background: rgba(255, 82, 82, 0.25);
+            border-color: rgba(255, 82, 82, 0.8);
+        }
+
+        .decision-badge .badge-icon {
+            font-size: 0.85rem;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .decision-badge.clicked {
+            animation: badgePulse 0.3s ease;
+        }
+
+        .terminal-footer {
+            padding: 1rem 1.5rem; border-top: 1px solid var(--grid-line);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--text-muted);
+        }
+
+        /* Stats counters */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem; margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card); border: 1px solid var(--grid-line);
+            padding: 1.25rem; text-align: center; position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-orange); transform: translateY(-2px);
+        }
+
+        .stat-value {
+            font-family: var(--font-display); font-size: 1.8rem;
+            font-weight: 700; color: var(--accent-orange); line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem;
+        }
+
+        .stat-tooltip {
+            display: none; position: absolute; bottom: calc(100% + 10px);
+            left: 50%; transform: translateX(-50%); width: 260px;
+            background: var(--bg-deep); border: 1px solid var(--accent-orange);
+            color: var(--text-main); font-size: 0.75rem; line-height: 1.5;
+            padding: 0.75rem 1rem; z-index: 100; text-transform: none;
+            letter-spacing: normal; font-weight: 400;
+            box-shadow: 0 4px 20px rgba(255, 145, 0, 0.15);
+        }
+
+        .stat-tooltip::after {
+            content: ''; position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent; border-top-color: var(--accent-orange);
+        }
+
+        .stat-card:hover .stat-tooltip { display: block; }
+
+        /* Install Section */
+        .install-section {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        }
+
+        .install-block {
+            background: var(--bg-panel); border: 1px solid var(--grid-line);
+            padding: 1.5rem; position: relative;
+        }
+
+        .install-block::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+        }
+
+        .install-label {
+            font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted);
+            letter-spacing: 0.1em; margin-bottom: 0.75rem;
+        }
+
+        .install-cmd {
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(0, 230, 118, 0.03); border: 1px solid rgba(0, 230, 118, 0.1);
+            padding: 0.75rem 1rem; gap: 1rem;
+        }
+
+        .install-cmd code {
+            color: var(--accent-green); font-size: 0.8rem;
+            word-break: break-all; flex: 1;
+        }
+
+        .copy-btn {
+            background: transparent; border: 1px solid var(--accent-green);
+            color: var(--accent-green); padding: 0.4rem 0.8rem;
+            font-family: var(--font-mono); font-size: 0.7rem;
+            cursor: pointer; transition: all 0.2s; white-space: nowrap;
+        }
+        .copy-btn:hover { background: var(--accent-green); color: var(--bg-deep); }
+        .copy-btn.copied { background: var(--accent-cyan); border-color: var(--accent-cyan); color: var(--bg-deep); }
+
+        /* Features */
+        .features {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card); border: 1px solid var(--grid-line);
+            padding: 1.75rem; position: relative; overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+            background: var(--accent-orange); opacity: 0; transition: opacity 0.3s;
+        }
+
+        .feature-card:hover { border-color: var(--accent-orange); transform: translateY(-3px); }
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-num {
+            font-family: var(--font-display); font-size: 2.5rem; font-weight: 700;
+            color: rgba(255, 145, 0, 0.1); margin-bottom: 0.75rem; line-height: 1;
+        }
+
+        .feature-title {
+            font-family: var(--font-display); font-size: 1.1rem;
+            color: var(--text-bright); margin-bottom: 0.5rem; font-weight: 600;
+        }
+
+        .feature-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+        .feature-tag {
+            display: inline-block; margin-top: 0.75rem; padding: 0.2rem 0.5rem;
+            background: rgba(255, 145, 0, 0.08); color: var(--accent-orange);
+            font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em;
+        }
+
+        /* Flow Section */
+        .flow-section {
+            background: var(--bg-panel); border: 1px solid var(--grid-line);
+            padding: 2rem; position: relative;
+        }
+
+        .flow-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+        }
+
+        .flow-title {
+            font-family: var(--font-display); font-size: 1.2rem;
+            color: var(--text-bright); margin-bottom: 1.5rem; font-weight: 600;
+        }
+
+        .flow-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .flow-step {
+            padding: 1rem; border: 1px solid var(--grid-line);
+            background: var(--bg-card); position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .flow-step:hover {
+            border-color: var(--accent-purple); transform: translateY(-2px);
+        }
+
+        .flow-step-num {
+            position: absolute; top: -10px; left: 10px;
+            padding: 0.15rem 0.5rem; background: var(--bg-deep);
+            border: 1px solid var(--accent-purple); color: var(--accent-purple);
+            font-size: 0.65rem; font-weight: 700;
+        }
+
+        .flow-step-title {
+            font-size: 0.85rem; color: var(--text-bright); font-weight: 600;
+            margin-bottom: 0.5rem; margin-top: 0.5rem;
+        }
+
+        .flow-step-desc { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* Architecture */
+        .arch-section {
+            background: var(--bg-panel); border: 1px solid var(--grid-line);
+            padding: 2rem; position: relative;
+        }
+
+        .arch-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        }
+
+        .arch-title {
+            font-family: var(--font-display); font-size: 1.2rem;
+            color: var(--text-bright); margin-bottom: 1.5rem; font-weight: 600;
+        }
+
+        .arch-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .arch-item {
+            padding: 1rem; border: 1px solid var(--grid-line);
+            background: var(--bg-card); overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .arch-item:hover {
+            border-color: var(--accent-cyan); transform: translateY(-2px);
+        }
+
+        .arch-item-label {
+            font-size: 0.65rem; text-transform: uppercase; color: var(--accent-cyan);
+            letter-spacing: 0.1em; margin-bottom: 0.5rem;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+
+        .arch-item-name {
+            font-size: 0.9rem; color: var(--text-bright); font-weight: 500;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+
+        .arch-item-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        .arch-tooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%; transform: translateX(-50%);
+            width: 280px;
+            padding: 14px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, rgba(15, 25, 40, 0.99), rgba(10, 18, 30, 0.99));
+            border: 1px solid rgba(0, 229, 255, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 229, 255, 0.2);
+            pointer-events: none;
+            transform: translateX(-50%) translateY(8px) scale(0.95);
+        }
+
+        .arch-item:hover .arch-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .arch-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: rgba(0, 229, 255, 0.5);
+        }
+
+        .arch-tooltip-title {
+            font-size: 0.82rem; font-weight: 700; color: #4dd0e1;
+            margin-bottom: 8px;
+        }
+
+        .arch-tooltip-desc {
+            font-size: 0.76rem; color: #b0c4de; line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .arch-tooltip ul {
+            margin: 4px 0 0; padding-left: 14px;
+        }
+
+        .arch-tooltip li {
+            font-size: 0.72rem; color: #c8dff4; margin-bottom: 2px;
+        }
+
+        .arch-tooltip code {
+            display: block; margin-top: 8px;
+            padding: 6px 8px; background: rgba(0,0,0,0.4);
+            border-radius: 4px; font-size: 0.68rem; color: #80cbc4;
+        }
+
+        .arch-item:hover {
+            border-color: rgba(0, 229, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+        }
+
+        /* API Reference */
+        .api-section {
+            background: var(--bg-panel); border: 1px solid var(--grid-line);
+            padding: 2rem; position: relative;
+        }
+
+        .api-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-yellow), transparent);
+        }
+
+        .api-title {
+            font-family: var(--font-display); font-size: 1.2rem;
+            color: var(--text-bright); margin-bottom: 1.5rem; font-weight: 600;
+        }
+
+        .api-table {
+            width: 100%; border-collapse: collapse; font-size: 0.8rem;
+        }
+
+        .api-table th {
+            text-align: left; padding: 0.75rem 1rem;
+            border-bottom: 2px solid var(--grid-line); color: var(--accent-yellow);
+            font-weight: 600;
+        }
+
+        .api-table td {
+            padding: 0.75rem 1rem; border-bottom: 1px solid var(--grid-line);
+            color: var(--text-muted);
+        }
+
+        .api-table tr:hover td { background: rgba(255, 215, 64, 0.02); }
+
+        .api-method {
+            display: inline-block; padding: 0.15rem 0.5rem;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+        }
+
+        .api-method.get { background: rgba(0, 230, 118, 0.15); color: var(--accent-green); }
+        .api-method.post { background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan); }
+
+        /* Compliance Section */
+        .compliance-section {
+            background: var(--bg-panel); border: 1px solid var(--grid-line);
+            padding: 2rem; position: relative;
+        }
+
+        .compliance-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-emerald), transparent);
+        }
+
+        .compliance-title {
+            font-family: var(--font-display); font-size: 1.2rem;
+            color: var(--text-bright); margin-bottom: 1.5rem; font-weight: 600;
+        }
+
+        .compliance-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .compliance-item {
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            padding: 1rem; border: 1px solid var(--grid-line);
+            background: var(--bg-card);
+            transition: border-color 0.3s;
+        }
+
+        .compliance-item:hover { border-color: var(--accent-emerald); }
+
+        .compliance-icon {
+            flex-shrink: 0; width: 24px; height: 24px;
+            background: rgba(16, 185, 129, 0.15);
+            border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            color: var(--accent-emerald); font-size: 0.8rem;
+        }
+
+        .compliance-text { font-size: 0.8rem; color: var(--text-muted); }
+        .compliance-text strong { color: var(--text-bright); display: block; margin-bottom: 0.25rem; }
+
+        /* Versions */
+        .versions-section {
+            background: var(--bg-panel); border: 1px solid var(--grid-line);
+            padding: 2rem; position: relative;
+        }
+
+        .versions-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+        }
+
+        .versions-title {
+            font-family: var(--font-display); font-size: 1.2rem;
+            color: var(--text-bright); margin-bottom: 1.5rem; font-weight: 600;
+        }
+
+        .versions-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .version-item {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.75rem 1rem; border: 1px solid var(--grid-line);
+            background: var(--bg-card); font-size: 0.8rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .version-item:hover {
+            border-color: var(--accent-purple); transform: translateY(-2px);
+        }
+
+        .version-num {
+            color: var(--accent-purple); font-weight: 700; min-width: 40px;
+        }
+
+        .version-desc { color: var(--text-muted); }
+
+        /* Author */
+        .author-section {
+            background: var(--bg-panel); border: 1px solid var(--grid-line);
+            padding: 2rem; position: relative;
+        }
+
+        .author-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        }
+
+        .author-card {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1.5rem;
+        }
+
+        .author-name {
+            font-family: var(--font-display); font-size: 1.1rem;
+            color: var(--text-bright); font-weight: 600;
+        }
+
+        .author-title {
+            font-size: 0.85rem; color: var(--accent-cyan); margin-top: 0.25rem;
+        }
+
+        .author-exp {
+            font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 2rem; padding: 2rem 0; border-top: 1px solid var(--grid-line);
+        }
+
+        .footer-content {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1rem;
+        }
+
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a {
+            color: var(--accent-orange); text-decoration: none; font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--text-bright); }
+
+        .footer-link-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-link-icon svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .footer-link-icon:hover svg {
+            opacity: 1;
+        }
+
+        .main-site-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 230, 118, 0.1));
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 10px;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 16px;
+            letter-spacing: 0.02em;
+        }
+
+        .main-site-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.18), rgba(0, 230, 118, 0.18));
+            border-color: rgba(0, 229, 255, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.25), 0 0 25px rgba(0, 229, 255, 0.15);
+            transform: translateY(-2px);
+            color: #4dd0e1;
+        }
+
+        .main-site-btn:active {
+            transform: translateY(0);
+        }
+
+        .main-site-btn svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.2s;
+        }
+
+        .main-site-btn:hover svg {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .more-projects {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--grid-line);
+        }
+
+        .more-projects-title {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .more-projects-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--grid-line);
+            border-radius: 6px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .project-link:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .project-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 145, 0, 0.08);
+            border: 1px solid rgba(255, 145, 0, 0.3);
+            border-radius: 8px;
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 12px;
+        }
+
+        .telegram-btn:hover {
+            background: rgba(255, 145, 0, 0.15);
+            border-color: rgba(255, 145, 0, 0.6);
+            box-shadow: 0 4px 16px rgba(255, 145, 0, 0.25), 0 0 20px rgba(255, 145, 0, 0.15);
+            transform: translateY(-2px);
+            color: #ffb74d;
+        }
+
+        .telegram-btn:active {
+            transform: translateY(0);
+        }
+
+        .telegram-btn svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.2s;
+        }
+
+        .telegram-btn:hover svg {
+            transform: scale(1.1);
+        }
+
+        .footer-copy {
+            font-size: 0.65rem; color: var(--text-muted); margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        main {
+            display: flex; flex-direction: column; gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sections after terminal scroll over it */
+        .flow-section,
+        .stats-bar,
+        .install-section,
+        .features,
+        .api-section,
+        .compliance-section,
+        .arch-section,
+        .author-section {
+            position: relative;
+            z-index: 2;
+            background: var(--bg-deep);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .install-section { grid-template-columns: 1fr; }
+            .terminal-body { padding: 1rem; font-size: 0.75rem; }
+            header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .header-right { text-align: left; }
+            .api-table { font-size: 0.75rem; }
+            .api-table th, .api-table td { padding: 0.5rem; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .flow-grid { grid-template-columns: 1fr; }
+            .arch-grid { grid-template-columns: 1fr; }
+            .arch-tooltip {
+                position: fixed;
+                left: 16px !important;
+                right: 16px;
+                width: auto !important;
+                max-width: calc(100vw - 32px);
+                bottom: auto;
+                top: auto;
+            }
+            .demo-controls { flex-wrap: wrap; }
+            .demo-btn { font-size: 0.6rem; padding: 3px 6px; }
+            .terminal-title { display: none; }
+            .telegram-btn { width: 100%; justify-content: center; }
+            .main-site-btn { width: 100%; justify-content: center; }
+            .footer-links { flex-wrap: wrap; gap: 1rem; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-orange); }
+
+        /* Selection */
+        ::selection { background: rgba(255, 145, 0, 0.3); color: #fff; }
+
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+        }
+
+        /* Decision flow visualization */
+        .decision-flow-wrapper {
+            position: relative;
+            margin-top: 1.5rem;
+        }
+
+        .decision-flow {
+            display: flex; align-items: center; justify-content: flex-start;
+            gap: 0; margin-top: 1.5rem; overflow-x: auto;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .fp-stage {
+            flex-shrink: 0;
+            padding: 0.85rem 1.1rem;
+            border-radius: 10px;
+            background: linear-gradient(145deg, rgba(25, 50, 75, 0.8), rgba(18, 35, 55, 0.9));
+            border: 1.5px solid rgba(255, 145, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            min-width: 115px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .fp-stage:hover {
+            background: linear-gradient(145deg, rgba(35, 65, 95, 0.9), rgba(25, 45, 70, 0.95));
+            border-color: rgba(255, 145, 0, 0.8);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 145, 0, 0.3);
+        }
+
+        .fp-stage.is-pulsing {
+            animation: fraudPulse 0.6s ease;
+            border-color: rgba(255, 145, 0, 0.8);
+            box-shadow: 0 0 16px rgba(255, 145, 0, 0.4);
+        }
+
+        @keyframes fraudPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .fp-stage--auth { border-color: rgba(0, 229, 255, 0.4); }
+        .fp-stage--auth:hover, .fp-stage--auth.is-pulsing { border-color: rgba(0, 229, 255, 0.8); box-shadow: 0 0 16px rgba(0, 229, 255, 0.4); }
+        .fp-stage--redis { border-color: rgba(255, 82, 82, 0.4); }
+        .fp-stage--redis:hover, .fp-stage--redis.is-pulsing { border-color: rgba(255, 82, 82, 0.8); box-shadow: 0 0 16px rgba(255, 82, 82, 0.4); }
+        .fp-stage--blacklist { border-color: rgba(179, 136, 255, 0.4); }
+        .fp-stage--blacklist:hover, .fp-stage--blacklist.is-pulsing { border-color: rgba(179, 136, 255, 0.8); box-shadow: 0 0 16px rgba(179, 136, 255, 0.4); }
+        .fp-stage--ml { border-color: rgba(0, 230, 118, 0.4); }
+        .fp-stage--ml:hover, .fp-stage--ml.is-pulsing { border-color: rgba(0, 230, 118, 0.8); box-shadow: 0 0 16px rgba(0, 230, 118, 0.4); }
+        .fp-stage--decision { border-color: rgba(255, 215, 64, 0.4); }
+        .fp-stage--decision:hover, .fp-stage--decision.is-pulsing { border-color: rgba(255, 215, 64, 0.8); box-shadow: 0 0 16px rgba(255, 215, 64, 0.4); }
+        .fp-stage--persist { border-color: rgba(16, 185, 129, 0.4); }
+        .fp-stage--persist:hover, .fp-stage--persist.is-pulsing { border-color: rgba(16, 185, 129, 0.8); box-shadow: 0 0 16px rgba(16, 185, 129, 0.4); }
+        .fp-stage--output { border-color: rgba(98, 245, 187, 0.4); }
+        .fp-stage--output:hover, .fp-stage--output.is-pulsing { border-color: rgba(98, 245, 187, 0.8); box-shadow: 0 0 16px rgba(98, 245, 187, 0.4); }
+
+        .fp-label {
+            font-size: 0.78rem; font-weight: 700; color: #fff;
+            letter-spacing: 0.05em; white-space: nowrap;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        .fp-sublabel {
+            font-size: 0.62rem; color: #b0c4de; margin-top: 3px;
+            letter-spacing: 0.03em;
+        }
+
+        .fp-click-hint {
+            font-size: 0.55rem; color: rgba(255, 255, 255, 0.4);
+            margin-top: 4px; text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .fp-stage:hover .fp-click-hint {
+            opacity: 1;
+        }
+
+        .fp-arrow {
+            flex-shrink: 0; width: 28px; height: 2px;
+            background: rgba(255, 145, 0, 0.3);
+            position: relative;
+        }
+
+        .fp-arrow::after {
+            content: ''; position: absolute;
+            right: -5px; top: -3.5px;
+            width: 0; height: 0;
+            border-left: 7px solid rgba(255, 145, 0, 0.3);
+            border-top: 4.5px solid transparent;
+            border-bottom: 4.5px solid transparent;
+        }
+
+        .fp-arrow.is-flowing::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 50%;
+            transform: translateY(-50%);
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 145, 0, 1) 0%, rgba(255, 145, 0, 0.4) 70%);
+            box-shadow: 0 0 12px rgba(255, 145, 0, 0.8);
+            animation: flowPulse 0.6s ease forwards;
+        }
+
+        .fp-arrow.is-flowing {
+            background: linear-gradient(90deg, rgba(255, 145, 0, 0.3), rgba(255, 145, 0, 0.8), rgba(255, 145, 0, 0.3));
+            background-size: 200% 100%;
+            animation: fraudFlow 0.6s ease;
+        }
+
+        @keyframes flowPulse {
+            0% { left: 0; opacity: 0; transform: translateY(-50%) scale(0.5); }
+            20% { opacity: 1; transform: translateY(-50%) scale(1); }
+            100% { left: 100%; opacity: 0; transform: translateY(-50%) scale(0.8); }
+        }
+
+        @keyframes fraudFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Tooltip for flow stages */
+        .fp-stage-tooltip {
+            position: absolute;
+            bottom: calc(100% + 14px);
+            left: 50%; transform: translateX(-50%);
+            width: 300px;
+            padding: 14px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(15, 25, 40, 0.99), rgba(10, 18, 30, 0.99));
+            border: 1px solid rgba(255, 145, 0, 0.6);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 145, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+            transform: translateX(-50%) translateY(8px) scale(0.95);
+        }
+
+        .fp-stage:hover .fp-stage-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .fp-stage-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: rgba(255, 145, 0, 0.6);
+        }
+
+        .fp-stage-tooltip::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 145, 0, 0.15), rgba(255, 82, 82, 0.1));
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0.6;
+        }
+
+        .fp-stage-tooltip-title {
+            font-size: 0.82rem; font-weight: 700; color: #ffb74d;
+            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em;
+            text-shadow: 0 0 10px rgba(255, 183, 77, 0.4);
+        }
+
+        .fp-stage-tooltip-desc {
+            font-size: 0.76rem; color: #b0c4de; line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .fp-stage-tooltip-code {
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 145, 0, 0.25);
+            border-radius: 8px;
+            font-size: 0.72rem; color: #ffe0b2;
+            font-family: var(--font-mono);
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        .fp-stage-tooltip-code .json-key { color: #4dd0e1; }
+        .fp-stage-tooltip-code .json-string { color: #69f0ae; }
+
+        /* Stage detail panel */
+        .flow-detail-panel {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            border: 1px solid var(--grid-line);
+            border-radius: 10px;
+            background: rgba(10, 22, 40, 0.72);
+            display: none;
+            animation: fraudDetailFade 0.25s ease;
+        }
+
+        .flow-detail-panel.is-active {
+            display: block;
+        }
+
+        @keyframes fraudDetailFade {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .flow-detail-panel h4 {
+            margin: 0 0 8px; color: #22d3ee; font-size: 0.9rem;
+        }
+
+        .flow-detail-panel p {
+            margin: 0 0 8px; color: #a8c4dc; font-size: 0.8rem; line-height: 1.5;
+        }
+
+        .flow-detail-panel ul {
+            margin: 4px 0 8px; padding-left: 16px;
+        }
+
+        .flow-detail-panel li {
+            margin-bottom: 4px; font-size: 0.78rem; color: #c8dff4;
+        }
+
+        .flow-detail-panel code {
+            padding: 2px 6px; background: rgba(0,0,0,0.3); border-radius: 4px;
+            font-size: 0.74rem; color: #ffe0b2;
+        }
+
+        .flow-detail-panel .code-block {
+            margin: 8px 0 0; padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 145, 0, 0.12);
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.72rem; color: #ffe0b2;
+            font-family: var(--font-mono);
+            white-space: pre-wrap; word-break: break-all;
+        }
+
+        /* Flow controls */
+        .flow-controls {
+            display: flex; gap: 8px; align-items: center; margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .flow-btn {
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 145, 0, 0.4);
+            background: rgba(255, 145, 0, 0.08);
+            color: #ff9100;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 6px;
+        }
+
+        .flow-btn:hover {
+            background: rgba(255, 145, 0, 0.2);
+            border-color: rgba(255, 145, 0, 0.7);
+            transform: translateY(-1px);
+        }
+
+        .flow-btn.active {
+            background: rgba(255, 145, 0, 0.3);
+            border-color: rgba(255, 145, 0, 0.8);
+        }
+
+        .flow-status {
+            margin-left: auto;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .flow-status .status-dot {
+            display: inline-block;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            margin-right: 4px;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .decision-flow {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .fp-stage {
+                min-width: auto;
+                width: 100%;
+            }
+            .fp-arrow {
+                width: 2px; height: 24px;
+                align-self: center;
+                background: rgba(255, 145, 0, 0.4);
+            }
+            .fp-arrow::after {
+                right: -5px; top: auto; bottom: -6px;
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-top: 8px solid rgba(255, 145, 0, 0.4);
+                border-bottom: none;
+            }
+            .fp-stage-tooltip {
+                position: fixed;
+                left: 16px !important;
+                right: 16px;
+                bottom: auto;
+                top: auto;
+                width: auto !important;
+                max-width: calc(100vw - 32px);
+                transform: none !important;
+                bottom: calc(100% + 10px);
+            }
+            .fp-stage:hover .fp-stage-tooltip {
+                transform: none !important;
+            }
+            .fp-stage-tooltip::after {
+                display: none;
+            }
+            .fp-label { font-size: 0.82rem; }
+            .fp-sublabel { font-size: 0.68rem; }
+        }
+
+        /* Async mode */
+        .async-badge {
+            display: inline-block; padding: 0.2rem 0.5rem;
+            background: rgba(179, 136, 255, 0.15); color: var(--accent-purple);
+            font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise"></div>
+    <div class="scanline"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <div class="mouse-glow" id="mouse-glow"></div>
+
+    <!-- Sticky Mini-bar -->
+    <div class="terminal-sticky-bar" id="sticky-bar">
+        <div class="sticky-title">
+            <div class="sticky-dots">
+                <div class="sticky-dot"></div>
+                <div class="sticky-dot"></div>
+                <div class="sticky-dot"></div>
+            </div>
+            <span>Fraud Engine Demo</span>
+        </div>
+        <div class="sticky-controls">
+            <button class="sticky-btn active" onclick="stickyDecision('allow')">✓ Allow</button>
+            <button class="sticky-btn" onclick="stickyDecision('review')">⚠ Review</button>
+            <button class="sticky-btn" onclick="stickyDecision('block')">✕ Block</button>
+        </div>
+        <div class="sticky-result" id="sticky-result">Score: 0.12 · 3.8ms</div>
+        <button class="sticky-close" onclick="closeStickyBar()" aria-label="Закрыть">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <header role="banner">
+            <div>
+                <div class="logo-area">
+                    <div class="logo-icon">FE</div>
+                    <div>
+                        <h1>Fraud Detection Engine</h1>
+                        <p class="tagline">Антифрод ML-система на Golang — Обнаружение мошенничества</p>
+                    </div>
+                </div>
+                <div class="status-badges">
+                    <span class="badge production">● PRODUCTION READY</span>
+                    <span class="badge compliance">152-ФЗ</span>
+                    <span class="badge">Go 1.25+</span>
+                    <span class="badge">Golang</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="version-badge">v6.2</div>
+                <div>
+                    <a href="https://github.com/turkprogrammer/fraud-engine" target="_blank" rel="noopener" class="github-link">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        GitHub →
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main role="main">
+            <!-- Terminal Demo -->
+            <section class="terminal-demo" aria-label="Демонстрация Fraud Detection Engine">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot"></div>
+                        <div class="terminal-dot"></div>
+                        <div class="terminal-dot"></div>
+                    </div>
+                    <div class="terminal-title">fraud-engine — demo</div>
+                    <div class="demo-controls">
+                        <button class="demo-btn active" data-demo="sync" onclick="switchDemo('sync')">Sync</button>
+                        <button class="demo-btn" data-demo="async" onclick="switchDemo('async')">Async</button>
+                        <button class="demo-btn" data-demo="replay" onclick="switchDemo('replay')">Replay</button>
+                    </div>
+                </div>
+
+                <div class="terminal-body" id="terminal-body">
+                    <div class="terminal-cmd" id="demo-cmd">
+                        <span class="prompt">$</span>
+                        <span class="cmd" id="typing-cmd"></span>
+                        <span class="cursor"></span>
+                    </div>
+
+                    <div id="demo-response" style="margin-top: 1rem;">
+                        <div class="json-block">
+<span class="json-comment">// Sync response — 200 OK</span>
+{
+  <span class="json-key">"transaction_id"</span>: <span class="json-string">"tx_001"</span>,
+  <span class="json-key">"score"</span>: <span class="json-number">0.85</span>,
+  <span class="json-key">"decision"</span>: <span class="json-string">"block"</span>,
+  <span class="json-key">"risk_level"</span>: <span class="json-string">"high"</span>,
+  <span class="json-key">"reasons"</span>: [
+    <span class="json-string">"high transaction amount"</span>,
+    <span class="json-string">"risky merchant category"</span>
+  ],
+  <span class="json-key">"latency_ms"</span>: <span class="json-number">4.2</span>
+}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terminal-footer">
+                    <div class="footer-badges">
+                        <button class="decision-badge allow active" data-decision="allow" onclick="showDecision('allow')">
+                            <span class="badge-icon">✓</span>
+                            <span>ALLOW</span>
+                        </button>
+                        <button class="decision-badge review" data-decision="review" onclick="showDecision('review')">
+                            <span class="badge-icon">⚠</span>
+                            <span>REVIEW</span>
+                        </button>
+                        <button class="decision-badge block" data-decision="block" onclick="showDecision('block')">
+                            <span class="badge-icon">✕</span>
+                            <span>BLOCK</span>
+                        </button>
+                    </div>
+                    <div class="demo-stats">
+                        <span id="demo-latency">P95: 4.2ms</span>
+                        <span>·</span>
+                        <span id="demo-score">Score: 0.25</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Decision Flow -->
+            <section class="flow-section" aria-label="Флоу обработки">
+                <h2 class="flow-title">Флоу обработки транзакции</h2>
+                <div style="display:flex; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; align-items:center;">
+                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; color:#b0c4de;">
+                        <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--accent-orange); animation:dotPulse 1.5s ease-in-out infinite;"></span>
+                        Hover для тултипов
+                    </span>
+                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; color:#b0c4de;">
+                        <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--accent-cyan);"></span>
+                        Click для деталей
+                    </span>
+                </div>
+                
+                <div class="decision-flow-wrapper">
+                    <div class="decision-flow" id="flow-pipeline">
+                        <div class="fp-stage" data-stage="client" onclick="showStageDetail('client')">
+                            <div class="fp-label">Client</div>
+                            <div class="fp-sublabel">POST /v1/score</div>
+                            <div class="fp-click-hint">Click for details</div>
+                            <div class="fp-stage-tooltip">
+                                <div class="fp-stage-tooltip-title">📥 Входящий запрос</div>
+                                <div class="fp-stage-tooltip-desc">Клиент отправляет JSON на <code>/v1/score</code>. Обязательные: <code>transaction_id</code>, <code>amount</code>, <code>currency</code>, <code>user_id</code>.</div>
+                                <div class="fp-stage-tooltip-code"><span class="json-key">"transaction_id"</span>: <span class="json-string">"tx_001"</span>
+<span class="json-key">"amount"</span>: <span style="color:#ff9100">5000</span>
+<span class="json-key">"currency"</span>: <span class="json-string">"RUB"</span></div>
+                            </div>
+                        </div>
+                        <div class="fp-arrow" id="arrow-0"></div>
+
+                        <div class="fp-stage fp-stage--auth" data-stage="auth" onclick="showStageDetail('auth')">
+                            <div class="fp-label">Auth</div>
+                            <div class="fp-sublabel">X-API-Key</div>
+                            <div class="fp-click-hint">Click for details</div>
+                            <div class="fp-stage-tooltip">
+                                <div class="fp-stage-tooltip-title">🔐 Аутентификация</div>
+                                <div class="fp-stage-tooltip-desc">SHA-256 хеш API-ключа в БД. Определение <code>tenant_id</code>. Rate limit: 70K req/min.</div>
+                                <div class="fp-stage-tooltip-code"><span class="json-key">"X-API-Key"</span>: <span class="json-string">"fd_live_xxx"</span>
+→ SHA-256 → tenant_id = <span class="json-string">"acme"</span></div>
+                            </div>
+                        </div>
+                        <div class="fp-arrow" id="arrow-1"></div>
+
+                        <div class="fp-stage fp-stage--redis" data-stage="idempotency" onclick="showStageDetail('idempotency')">
+                            <div class="fp-label">Idempotency</div>
+                            <div class="fp-sublabel">Redis cache</div>
+                            <div class="fp-click-hint">Click for details</div>
+                            <div class="fp-stage-tooltip">
+                                <div class="fp-stage-tooltip-title">🔄 Идемпотентность</div>
+                                <div class="fp-stage-tooltip-desc">Redis кэш по <code>X-Idempotency-Key</code>. HIT = мгновенный ответ + <code>X-Idempotency-Replayed: true</code>.</div>
+                                <div class="fp-stage-tooltip-code">Redis: GET idempotency:{tenant}:{key}
+→ HIT? Return cached response</div>
+                            </div>
+                        </div>
+                        <div class="fp-arrow" id="arrow-2"></div>
+
+                        <div class="fp-stage fp-stage--blacklist" data-stage="blacklist" onclick="showStageDetail('blacklist')">
+                            <div class="fp-label">Blacklist</div>
+                            <div class="fp-sublabel">user_id check</div>
+                            <div class="fp-click-hint">Click for details</div>
+                            <div class="fp-stage-tooltip">
+                                <div class="fp-stage-tooltip-title">🚫 Чёрный список</div>
+                                <div class="fp-stage-tooltip-desc"><strong>Мгновенный block</strong> без ML! Проверка <code>blacklist:{type}:{id}</code> в Redis.</div>
+                                <div class="fp-stage-tooltip-code">GET blacklist:user:user_123
+→ <span style="color:#ff5252;font-weight:700">BLOCK</span> if exists</div>
+                            </div>
+                        </div>
+                        <div class="fp-arrow" id="arrow-3"></div>
+
+                        <div class="fp-stage fp-stage--ml" data-stage="ml" onclick="showStageDetail('ml')">
+                            <div class="fp-label">ML Scoring</div>
+                            <div class="fp-sublabel">Random Forest</div>
+                            <div class="fp-click-hint">Click for details</div>
+                            <div class="fp-stage-tooltip">
+                                <div class="fp-stage-tooltip-title">🧠 ML-скоринг</div>
+                                <div class="fp-stage-tooltip-desc"><strong>Random Forest</strong> на Go без зависимостей. 20 признаков, LRU кэш моделей, hot-reload. Fallback: tenant → default → heuristic.</div>
+                                <div class="fp-stage-tooltip-code">FeatureExtractor → 20 features
+RandomForest.predict() → <span style="color:#ff9100;font-weight:700">0.85</span>
+PlattScaler → calibrated</div>
+                            </div>
+                        </div>
+                        <div class="fp-arrow" id="arrow-4"></div>
+
+                        <div class="fp-stage fp-stage--decision" data-stage="decision" onclick="showStageDetail('decision')">
+                            <div class="fp-label">Decision</div>
+                            <div class="fp-sublabel">allow/review/block</div>
+                            <div class="fp-click-hint">Click for details</div>
+                            <div class="fp-stage-tooltip">
+                                <div class="fp-stage-tooltip-title">⚖️ Принятие решения</div>
+                                <div class="fp-stage-tooltip-desc">Маппинг score → бизнес-решение. SHAP-like feature contributions для объяснения.</div>
+                                <div class="fp-stage-tooltip-code">score < 0.5 → <span style="color:#34d399;font-weight:700">ALLOW</span>
+0.5 - 0.79 → <span style="color:#ffd740;font-weight:700">REVIEW</span>
+score >= 0.8 → <span style="color:#ff5252;font-weight:700">BLOCK</span></div>
+                            </div>
+                        </div>
+                        <div class="fp-arrow" id="arrow-5"></div>
+
+                        <div class="fp-stage fp-stage--persist" data-stage="persist" onclick="showStageDetail('persist')">
+                            <div class="fp-label">Persist</div>
+                            <div class="fp-sublabel">PostgreSQL</div>
+                            <div class="fp-click-hint">Click for details</div>
+                            <div class="fp-stage-tooltip">
+                                <div class="fp-stage-tooltip-title">💾 Сохранение</div>
+                                <div class="fp-stage-tooltip-desc">Запись в <code>fraud_scores</code> для аудита. JSONB для reasons. Redis кэш для idempotency replay.</div>
+                                <div class="fp-stage-tooltip-code">INSERT INTO fraud_scores (...)
+→ Redis SET + EXPIRE 86400</div>
+                            </div>
+                        </div>
+                        <div class="fp-arrow" id="arrow-6"></div>
+
+                        <div class="fp-stage fp-stage--output" data-stage="response" onclick="showStageDetail('response')">
+                            <div class="fp-label">Response</div>
+                            <div class="fp-sublabel">200 / 202</div>
+                            <div class="fp-click-hint">Click for details</div>
+                            <div class="fp-stage-tooltip">
+                                <div class="fp-stage-tooltip-title">📤 Ответ клиенту</div>
+                                <div class="fp-stage-tooltip-desc"><strong>Sync:</strong> HTTP 200 + результат. <strong>Async:</strong> HTTP 202 + pending. P95: <span style="color:#69f0ae">4.2ms</span></div>
+                                <div class="fp-stage-tooltip-code">{<span class="json-key">"score"</span>: <span style="color:#ff9100">0.85</span>,
+ <span class="json-key">"decision"</span>: <span style="color:#ff5252;font-weight:700">"block"</span>}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-controls">
+                    <button class="flow-btn" onclick="simulateFlow('sync')">▶ Sync Mode</button>
+                    <button class="flow-btn" onclick="simulateFlow('async')">▶ Async Mode</button>
+                    <button class="flow-btn" onclick="simulateFlow('block')">▶ Block Scenario</button>
+                    <button class="flow-btn" onclick="simulateFlow('replay')">▶ Replay</button>
+                    <span class="flow-status" id="flow-status"><span class="status-dot"></span>Ready</span>
+                </div>
+
+                <div class="flow-detail-panel" id="flow-detail-panel">
+                    <h4 id="detail-title"></h4>
+                    <div id="detail-content"></div>
+                </div>
+            </section>
+
+            <!-- Stats counters -->
+            <section class="stats-bar" aria-label="Производительность">
+                <h2 class="sr-only">Производительность Fraud Detection Engine</h2>
+                <div class="stat-card">
+                    <div class="stat-value" data-target="1000">0</div>
+                    <div class="stat-label">RPS · Throughput</div>
+                    <div class="stat-tooltip">Рекордная пропускная способность при нагрузочном тестировании. Целевой показатель: 1000 RPS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-target="4.2">0</div>
+                    <div class="stat-label">ms · P95 Latency</div>
+                    <div class="stat-tooltip">95-й перцентиль задержки обработки. Целевой показатель: <30ms. Достигнут 7x лучше</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-target="100">0</div>
+                    <div class="stat-label">% · Success Rate</div>
+                    <div class="stat-tooltip">Процент успешных запросов. Целевой показатель: >99.9%. Достигнуто: 100%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-target="155">0</div>
+                    <div class="stat-label">+ Tests Passing</div>
+                    <div class="stat-tooltip">Unit, ML, Domain, PII, Middleware, E2E тесты. Race detector: pass</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-target="20">0</div>
+                    <div class="stat-label">Features · ML Scoring</div>
+                    <div class="stat-tooltip">Извлекаемых признаков для ML-модели. Feature extraction pipeline</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-target="70000">0</div>
+                    <div class="stat-label">req/min · Rate Limit</div>
+                    <div class="stat-tooltip">Максимальный лимит запросов в минуту (~1167 RPS). Настраивается через конфиг</div>
+                </div>
+            </section>
+
+            <!-- Install Section -->
+            <section class="install-section" aria-label="Установка">
+                <h2 class="sr-only">Установка Fraud Detection Engine</h2>
+                <div class="install-block">
+                    <div class="install-label">Запуск через Go</div>
+                    <div class="install-cmd">
+                        <code>go run cmd/server/main.go</code>
+                        <button class="copy-btn" onclick="copyCmd(this, 'go run cmd/server/main.go')">Копировать</button>
+                    </div>
+                </div>
+                <div class="install-block">
+                    <div class="install-label">Docker Production</div>
+                    <div class="install-cmd">
+                        <code>docker compose -f docker-compose.prod.yml up -d --build</code>
+                        <button class="copy-btn" onclick="copyCmd(this, 'docker compose -f docker-compose.prod.yml up -d --build')">Копировать</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="features" aria-label="Возможности">
+                <h2 class="sr-only">Возможности</h2>
+
+                <article class="feature-card">
+                    <div class="feature-num">01</div>
+                    <h3 class="feature-title">Real-time Scoring</h3>
+                    <p class="feature-desc">Скоринг транзакций в реальном времени. P95 latency 4.2ms — в 7 раз лучше целевого показателя.</p>
+                    <span class="feature-tag">< 5ms latency</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">02</div>
+                    <h3 class="feature-title">Random Forest ML</h3>
+                    <p class="feature-desc">ML-модель на Go без внешних зависимостей. Итеративный обход деревьев, LRU кэш, hot-reload через fsnotify.</p>
+                    <span class="feature-tag">20 features</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">03</div>
+                    <h3 class="feature-title">Multi-tenancy</h3>
+                    <p class="feature-desc">Изолированные ML-модели для разных tenant. Fallback chain: tenant model → default model → heuristic.</p>
+                    <span class="feature-tag">Tenant isolation</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">04</div>
+                    <h3 class="feature-title">SHAP Explanations</h3>
+                    <p class="feature-desc">Объяснение предсказаний через feature contributions. Клиент видит, почему транзакция заблокирована.</p>
+                    <span class="feature-tag">Explainability</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">05</div>
+                    <h3 class="feature-title">Async Pipeline</h3>
+                    <p class="feature-desc">Worker pool для асинхронной обработки. Queue + idempotency. Режим 202 Accepted для high-load сценариев.</p>
+                    <span class="feature-tag">Worker pool</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">06</div>
+                    <h3 class="feature-title">Idempotency</h3>
+                    <p class="feature-desc">Redis кэш для идемпотентных запросов. Tenant-scoped keys. Replayed response с заголовком X-Idempotency-Replayed.</p>
+                    <span class="feature-tag">Redis cache</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">07</div>
+                    <h3 class="feature-title">152-ФЗ Compliance</h3>
+                    <p class="feature-desc">PII masking в логах. TLS/HTTPS с Let's Encrypt. Аудит и трассируемость по transaction_id.</p>
+                    <span class="feature-tag">Data protection</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">08</div>
+                    <h3 class="feature-title">Platt Scaling</h3>
+                    <p class="feature-desc">Калибровка вероятностей для более точных score. Настройка через конфиг: platt_a, platt_b.</p>
+                    <span class="feature-tag">Probability calibration</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">09</div>
+                    <h3 class="feature-title">Template Modes</h3>
+                    <p class="feature-desc">Режимы для тестирования: fraud (всегда high), safe (всегда low), random. Без реальной модели.</p>
+                    <span class="feature-tag">Testing modes</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">10</div>
+                    <h3 class="feature-title">Risk Rules (YAML)</h3>
+                    <p class="feature-desc">Динамические правила риска в YAML. Email domains, merchant categories, countries. Hot-reload.</p>
+                    <span class="feature-tag">Configurable</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">11</div>
+                    <h3 class="feature-title">Prometheus + Grafana</h3>
+                    <p class="feature-desc">Метрики HTTP, ML cache, model reloads. 3 дашборда, 23 панели. Alert rules настроены.</p>
+                    <span class="feature-tag">Observability</span>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-num">12</div>
+                    <h3 class="feature-title">Production Verified</h3>
+                    <p class="feature-desc">32 PASS, 0 FAIL в аудите. Docker deployment. JSONB fix, deadlock fix. 100% success rate.</p>
+                    <span class="feature-tag">Audit passed</span>
+                </article>
+            </section>
+
+            <!-- API Reference -->
+            <section class="api-section" aria-label="API Reference">
+                <h2 class="api-title">API Endpoints</h2>
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="api-method get">GET</span></td>
+                            <td><code>/health</code></td>
+                            <td>Health check (postgres, redis, model)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="api-method post">POST</span></td>
+                            <td><code>/v1/score</code></td>
+                            <td>Скоринг транзакции (sync/async)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="api-method post">POST</span></td>
+                            <td><code>/v1/explain</code></td>
+                            <td>SHAP-like feature explanations</td>
+                        </tr>
+                        <tr>
+                            <td><span class="api-method get">GET</span></td>
+                            <td><code>/v1/alerts</code></td>
+                            <td>Получить alerts</td>
+                        </tr>
+                        <tr>
+                            <td><span class="api-method get">GET</span></td>
+                            <td><code>/metrics</code></td>
+                            <td>Prometheus метрики</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Compliance -->
+            <section class="compliance-section" aria-label="Compliance">
+                <h2 class="compliance-title">Compliance & Security</h2>
+                <div class="compliance-grid">
+                    <div class="compliance-item">
+                        <div class="compliance-icon">✓</div>
+                        <div class="compliance-text">
+                            <strong>152-ФЗ</strong>
+                            PII masking в логах, защита персональных данных
+                        </div>
+                    </div>
+                    <div class="compliance-item">
+                        <div class="compliance-icon">✓</div>
+                        <div class="compliance-text">
+                            <strong>TLS/HTTPS</strong>
+                            Auto Let's Encrypt,强制 HTTPS
+                        </div>
+                    </div>
+                    <div class="compliance-item">
+                        <div class="compliance-icon">✓</div>
+                        <div class="compliance-text">
+                            <strong>API Authentication</strong>
+                            X-API-Key header, tenant resolution
+                        </div>
+                    </div>
+                    <div class="compliance-item">
+                        <div class="compliance-icon">✓</div>
+                        <div class="compliance-text">
+                            <strong>Rate Limiting</strong>
+                            70,000 req/min (~1167 RPS)
+                        </div>
+                    </div>
+                    <div class="compliance-item">
+                        <div class="compliance-icon">✓</div>
+                        <div class="compliance-text">
+                            <strong>Idempotency</strong>
+                            Redis cache, tenant-scoped keys
+                        </div>
+                    </div>
+                    <div class="compliance-item">
+                        <div class="compliance-icon">✓</div>
+                        <div class="compliance-text">
+                            <strong>Audit Trail</strong>
+                            PostgreSQL persistence, transaction_id tracking
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture -->
+            <section class="arch-section" aria-label="Архитектура">
+                <h2 class="arch-title">Архитектура</h2>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">Наведите на компонент для описания</p>
+                <div class="arch-grid">
+                    <div class="arch-item" style="position:relative;">
+                        <div class="arch-item-label">entry point</div>
+                        <div class="arch-item-name">cmd/server/main.go</div>
+                        <div class="arch-item-desc">HTTP сервер, signal handling</div>
+                        <div class="arch-tooltip">
+                            <div class="arch-tooltip-title">🚀 Entry Point</div>
+                            <div class="arch-tooltip-desc">Точка входа приложения. Инициализирует зависимости, настраивает HTTP сервер, обрабатывает OS сигналы (SIGINT, SIGTERM) для graceful shutdown.</div>
+                            <code>go run cmd/server/main.go</code>
+                        </div>
+                    </div>
+                    <div class="arch-item" style="position:relative;">
+                        <div class="arch-item-label">domain</div>
+                        <div class="arch-item-name">internal/domain/</div>
+                        <div class="arch-item-desc">Transaction, FraudScore, Tenant</div>
+                        <div class="arch-tooltip">
+                            <div class="arch-tooltip-title">📦 Domain Layer</div>
+                            <div class="arch-tooltip-desc">Доменные сущности и бизнес-правила. Чистый Go без зависимостей от инфраструктуры.</div>
+                            <ul>
+                                <li><strong>Transaction</strong> — входящая транзакция</li>
+                                <li><strong>FraudScore</strong> — результат скоринга</li>
+                                <li><strong>Tenant</strong> — мульти-тенант</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="arch-item" style="position:relative;">
+                        <div class="arch-item-label">application</div>
+                        <div class="arch-item-name">internal/application/</div>
+                        <div class="arch-item-desc">ScoreService, AuthService</div>
+                        <div class="arch-tooltip">
+                            <div class="arch-tooltip-title">⚡ Application Layer</div>
+                            <div class="arch-tooltip-desc">Бизнес-логика и оркестрация. Связывает domain с adapters.</div>
+                            <ul>
+                                <li><strong>ScoreService</strong> — оркестрация скоринга</li>
+                                <li><strong>AuthService</strong> — аутентификация</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="arch-item" style="position:relative;">
+                        <div class="arch-item-label">http</div>
+                        <div class="arch-item-name">internal/adapters/http/</div>
+                        <div class="arch-item-desc">Handlers + Middleware</div>
+                        <div class="arch-tooltip">
+                            <div class="arch-tooltip-title">🌐 HTTP Adapter</div>
+                            <div class="arch-tooltip-desc">REST API handlers и middleware цепочка.</div>
+                            <ul>
+                                <li><strong>ScoreHandler</strong> — POST /v1/score</li>
+                                <li><strong>Middleware</strong> — Auth, RateLimit, Logging</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="arch-item" style="position:relative;">
+                        <div class="arch-item-label">ml</div>
+                        <div class="arch-item-name">internal/adapters/ml/</div>
+                        <div class="arch-item-desc">RandomForest, FeatureExtractor</div>
+                        <div class="arch-tooltip">
+                            <div class="arch-tooltip-title">🧠 ML Adapter</div>
+                            <div class="arch-tooltip-desc">Машинное обучение без внешних зависимостей.</div>
+                            <ul>
+                                <li><strong>RandomForest</strong> — ML-модель</li>
+                                <li><strong>FeatureExtractor</strong> — 20 признаков</li>
+                                <li><strong>ModelCache</strong> — LRU кэш</li>
+                                <li><strong>PlattScaler</strong> — калибровка</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="arch-item" style="position:relative;">
+                        <div class="arch-item-label">persistence</div>
+                        <div class="arch-item-name">internal/adapters/persistence/</div>
+                        <div class="arch-item-desc">PostgreSQL, Redis</div>
+                        <div class="arch-tooltip">
+                            <div class="arch-tooltip-title">💾 Persistence Adapter</div>
+                            <div class="arch-tooltip-desc">Хранение данных и кэширование.</div>
+                            <ul>
+                                <li><strong>PostgreSQL</strong> — fraud_scores, tenants, api_keys</li>
+                                <li><strong>Redis</strong> — idempotency, blacklist, session</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="arch-item" style="position:relative;">
+                        <div class="arch-item-label">async</div>
+                        <div class="arch-item-name">internal/adapters/async/</div>
+                        <div class="arch-item-desc">Worker pool</div>
+                        <div class="arch-tooltip">
+                            <div class="arch-tooltip-title">🔄 Async Adapter</div>
+                            <div class="arch-tooltip-desc">Асинхронная обработка для high-load.</div>
+                            <ul>
+                                <li><strong>WorkerPool</strong> — goroutine pool</li>
+                                <li><strong>Queue</strong> — in-memory очередь</li>
+                                <li>Режим 202 Accepted</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="arch-item" style="position:relative;">
+                        <div class="arch-item-label">config</div>
+                        <div class="arch-item-name">config/config.yaml</div>
+                        <div class="arch-item-desc">YAML + ENV variables</div>
+                        <div class="arch-tooltip">
+                            <div class="arch-tooltip-title">⚙️ Configuration</div>
+                            <div class="arch-tooltip-desc">Конфигурация через YAML +ENV override.</div>
+                            <ul>
+                                <li><strong>server</strong> — port, TLS</li>
+                                <li><strong>database</strong> — PostgreSQL</li>
+                                <li><strong>redis</strong> — подключение</li>
+                                <li><strong>ml</strong> — model_path, platt</li>
+                                <li><strong>async</strong> — worker_count</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- Author -->
+            <section class="author-section" aria-label="Об авторе">
+                <h2 class="sr-only">Об авторе</h2>
+                <div class="author-card">
+                    <div class="author-info">
+                        <div class="author-name">Юсупов Роберт Рахимович</div>
+                        <div class="author-title">Senior Backend Engineer</div>
+                        <div class="author-exp">18+ лет опыта · Go · PHP · ML · High-load</div>
+                    </div>
+                    <div class="author-links">
+                        <a href="https://github.com/turkprogrammer" target="_blank" rel="noopener" class="github-link">GitHub →</a>
+                    </div>
+                </div>
+            </section>
+
+            <footer role="contentinfo">
+                <div class="footer-content">
+                    <div>
+                        <div style="font-size: 0.85rem; color: var(--text-bright);">Fraud Detection Engine</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Антифрод система на Golang | 152-ФЗ · Multi-tenancy · SHAP</div>
+                        <a class="main-site-btn" href="https://yusupov-tech.ru" target="_blank" rel="noopener noreferrer" aria-label="Портфолио">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M2 12h20"></path>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                            yusupov-tech.ru
+                        </a>
+                        <a class="telegram-btn" href="https://t.me/turanellervarolsun" target="_blank" rel="noopener noreferrer" aria-label="Telegram @turanellervarolsun">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M21.6 4.4c.3-1.1-.7-2-1.8-1.7L3.7 8.1c-1.2.4-1.2 2.1 0 2.4l4.3 1.4 1.6 5.1c.3 1 1.6 1.4 2.4.7l2.4-2.1 4.2 3.1c.8.6 1.9.2 2.2-.8l2.8-13.5Zm-12.6 8.1 8.7-5.3-6.8 6.7-.3 3-1.6-4.4Z"></path>
+                            </svg>
+                            @turanellervarolsun
+                        </a>
+                        <div class="more-projects">
+                            <div class="more-projects-title">Ещё проекты</div>
+                            <div class="more-projects-links">
+                                <a class="project-link" href="https://turkprogrammer.github.io/logt/" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    LogT — TUI Log Viewer
+                                </a>
+                                <a class="project-link" href="https://turkprogrammer.github.io/mt/" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                                    MT — Go Runtime Trade-off
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <a class="footer-link-icon" href="https://github.com/turkprogrammer/fraud-engine" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                            GitHub
+                        </a>
+                        <a class="footer-link-icon" href="https://github.com/turkprogrammer/fraud-engine/blob/main/README.md" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Документация
+                        </a>
+                        <a class="footer-link-icon" href="https://github.com/turkprogrammer/fraud-engine/issues" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                            Обратная связь
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-copy">
+                    Go, PostgreSQL, Redis — зарегистрированные товарные знаки. Fraud Detection Engine не связан с Google.
+                    <br>Licensed under Apache License 2.0 · © 2024-2026 turkprogrammer
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Scroll progress
+        const headerHeight = 100;
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scroll-progress');
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+
+            // Terminal demo sticky behavior
+            const terminalDemo = document.querySelector('.terminal-demo');
+            const terminalSection = terminalDemo.parentElement;
+            const sectionRect = terminalSection.getBoundingClientRect();
+            const demoRect = terminalDemo.getBoundingClientRect();
+            
+            // Make demo sticky when header passes top
+            if (scrollTop > headerHeight && sectionRect.bottom > window.innerHeight) {
+                terminalDemo.classList.add('is-sticky');
+            } else {
+                terminalDemo.classList.remove('is-sticky');
+            }
+
+            // Show/hide mini-bar when demo scrolls out
+            const stickyBar = document.getElementById('sticky-bar');
+            if (demoRect.bottom < 0 && terminalDemo.classList.contains('is-sticky')) {
+                stickyBar.classList.add('visible');
+            } else {
+                stickyBar.classList.remove('visible');
+            }
+        });
+
+        // Mouse glow
+        const mouseGlow = document.getElementById('mouse-glow');
+        document.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                mouseGlow.style.left = e.clientX + 'px';
+                mouseGlow.style.top = e.clientY + 'px';
+            });
+        });
+
+        // Copy command
+        function copyCmd(btn, cmd) {
+            navigator.clipboard.writeText(cmd).then(() => {
+                btn.textContent = 'Скопировано ✓';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Копировать';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Animate stats on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statValues = entry.target.querySelectorAll('.stat-value');
+                    statValues.forEach(stat => {
+                        const target = parseFloat(stat.getAttribute('data-target'));
+                        const isFloat = target % 1 !== 0;
+                        let current = 0;
+                        const increment = target / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            stat.textContent = isFloat ? current.toFixed(1) : Math.floor(current);
+                        }, 30);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsBar = document.querySelector('.stats-bar');
+        if (statsBar) {
+            observer.observe(statsBar);
+        }
+
+        // Feature card hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Flow step animation
+        document.querySelectorAll('.flow-step').forEach((step, index) => {
+            step.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Decision node animation
+        document.querySelectorAll('.fp-stage').forEach((node, index) => {
+            node.style.opacity = '0';
+            node.style.animation = `fadeIn 0.3s ease forwards ${index * 0.1}s`;
+        });
+
+        // Decision scenarios
+        const decisionScenarios = {
+            allow: {
+                cmd: 'curl -X POST http://localhost:8080/v1/score \\\n  -H "Content-Type: application/json" \\\n  -H "X-API-Key: fd_live_demo" \\\n  -d \'{"transaction_id":"tx_001","amount":250,"currency":"RUB","user_id":"user_1"}\'',
+                response: `<span class="json-comment">// ✅ ALLOW — low risk transaction</span>
+{
+  <span class="json-key">"transaction_id"</span>: <span class="json-string">"tx_001"</span>,
+  <span class="json-key">"score"</span>: <span class="json-number" style="color:#34d399">0.12</span>,
+  <span class="json-key">"decision"</span>: <span style="color:#34d399;font-weight:700">"allow"</span>,
+  <span class="json-key">"risk_level"</span>: <span class="json-string">"low"</span>,
+  <span class="json-key">"reasons"</span>: [
+    <span class="json-string">"trusted user"</span>,
+    <span class="json-string">"normal amount range"</span>,
+    <span class="json-string">"domestic transaction"</span>
+  ],
+  <span class="json-key">"latency_ms"</span>: <span class="json-number">3.8</span>
+}`,
+                latency: '3.8ms',
+                score: '0.12'
+            },
+            review: {
+                cmd: 'curl -X POST http://localhost:8080/v1/score \\\n  -H "Content-Type: application/json" \\\n  -H "X-API-Key: fd_live_demo" \\\n  -d \'{"transaction_id":"tx_002","amount":45000,"currency":"RUB","user_id":"user_2","country":"NG"}\'',
+                response: `<span class="json-comment">// ⚠️ REVIEW — medium risk, needs manual check</span>
+{
+  <span class="json-key">"transaction_id"</span>: <span class="json-string">"tx_002"</span>,
+  <span class="json-key">"score"</span>: <span class="json-number" style="color:#ffd740">0.67</span>,
+  <span class="json-key">"decision"</span>: <span style="color:#ffd740;font-weight:700">"review"</span>,
+  <span class="json-key">"risk_level"</span>: <span class="json-string">"medium"</span>,
+  <span class="json-key">"reasons"</span>: [
+    <span class="json-string">"high transaction amount"</span>,
+    <span class="json-string">"high-risk country"</span>,
+    <span class="json-string">"unusual time"</span>
+  ],
+  <span class="json-key">"requires_action"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"latency_ms"</span>: <span class="json-number">4.1</span>
+}`,
+                latency: '4.1ms',
+                score: '0.67'
+            },
+            block: {
+                cmd: 'curl -X POST http://localhost:8080/v1/score \\\n  -H "Content-Type: application/json" \\\n  -H "X-API-Key: fd_live_demo" \\\n  -d \'{"transaction_id":"tx_003","amount":99999,"currency":"RUB","user_id":"user_3","ip_address":"185.220.101.1"}\'',
+                response: `<span class="json-comment">// ❌ BLOCK — high risk, fraudulent pattern detected</span>
+{
+  <span class="json-key">"transaction_id"</span>: <span class="json-string">"tx_003"</span>,
+  <span class="json-key">"score"</span>: <span class="json-number" style="color:#ff5252">0.94</span>,
+  <span class="json-key">"decision"</span>: <span style="color:#ff5252;font-weight:700">"block"</span>,
+  <span class="json-key">"risk_level"</span>: <span class="json-string">"critical"</span>,
+  <span class="json-key">"reasons"</span>: [
+    <span class="json-string">"velocity limit exceeded"</span>,
+    <span class="json-string">"blacklisted IP"</span>,
+    <span class="json-string">"amount threshold exceeded"</span>,
+    <span class="json-string">"suspicious pattern match"</span>
+  ],
+  <span class="json-key">"fraud_probability"</span>: <span class="json-number">0.94</span>,
+  <span class="json-key">"latency_ms"</span>: <span class="json-number">4.5</span>
+}`,
+                latency: '4.5ms',
+                score: '0.94'
+            }
+        };
+
+        function showDecision(type) {
+            // Update active state
+            document.querySelectorAll('.decision-badge').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.querySelector(`[data-decision="${type}"]`);
+            activeBtn.classList.add('active');
+            activeBtn.classList.add('clicked');
+            setTimeout(() => activeBtn.classList.remove('clicked'), 300);
+            
+            // Update demo
+            const scenario = decisionScenarios[type];
+            const cmdEl = document.getElementById('typing-cmd');
+            const responseEl = document.getElementById('demo-response');
+            const latencyEl = document.getElementById('demo-latency');
+            const scoreEl = document.getElementById('demo-score');
+            
+            // Typing animation
+            cmdEl.textContent = '';
+            responseEl.innerHTML = '<div class="json-block" style="opacity:0.5"><span class="json-comment">// Processing...</span></div>';
+            
+            let i = 0;
+            const typeInterval = setInterval(() => {
+                if (i < scenario.cmd.length) {
+                    cmdEl.textContent += scenario.cmd[i];
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                    setTimeout(() => {
+                        responseEl.innerHTML = `<div class="json-block">${scenario.response}</div>`;
+                        latencyEl.textContent = scenario.latency;
+                        scoreEl.textContent = 'Score: ' + scenario.score;
+                    }, 400);
+                }
+            }, 12);
+        }
+
+        // Sticky bar functions
+        function closeStickyBar() {
+            const bar = document.getElementById('sticky-bar');
+            bar.classList.remove('visible');
+            bar.classList.add('hidden');
+        }
+
+        const stickyData = {
+            allow: { score: '0.12', latency: '3.8ms' },
+            review: { score: '0.67', latency: '4.1ms' },
+            block: { score: '0.94', latency: '4.5ms' }
+        };
+
+        function stickyDecision(type) {
+            document.querySelectorAll('.sticky-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            const result = document.getElementById('sticky-result');
+            const data = stickyData[type];
+            result.textContent = `Score: ${data.score} · ${data.latency}`;
+            showDecision(type);
+        }
+
+        // Demo scenarios
+        const demoScenarios = {
+            sync: {
+                cmd: 'curl -X POST http://localhost:8080/v1/score \\\n  -H "Content-Type: application/json" \\\n  -H "X-API-Key: fd_live_demo" \\\n  -H "X-Idempotency-Key: idem_001" \\\n  -d \'{"transaction_id":"tx_001","amount":5000,"currency":"RUB","user_id":"user_1"}\'',
+                response: `<span class="json-comment">// Sync response — 200 OK</span>
+{
+  <span class="json-key">"transaction_id"</span>: <span class="json-string">"tx_001"</span>,
+  <span class="json-key">"score"</span>: <span class="json-number">0.85</span>,
+  <span class="json-key">"decision"</span>: <span class="json-string">"block"</span>,
+  <span class="json-key">"risk_level"</span>: <span class="json-string">"high"</span>,
+  <span class="json-key">"reasons"</span>: [
+    <span class="json-string">"high transaction amount"</span>,
+    <span class="json-string">"risky merchant category"</span>
+  ],
+  <span class="json-key">"latency_ms"</span>: <span class="json-number">4.2</span>
+}`,
+                latency: 'P95: 4.2ms'
+            },
+            async: {
+                cmd: 'curl -X POST http://localhost:8080/v1/score \\\n  -H "Content-Type: application/json" \\\n  -H "X-API-Key: fd_live_demo" \\\n  -H "X-Async: true" \\\n  -d \'{"transaction_id":"tx_002","amount":15000,"currency":"RUB"}\'',
+                response: `<span class="json-comment">// Async response — 202 Accepted</span>
+{
+  <span class="json-key">"transaction_id"</span>: <span class="json-string">"tx_002"</span>,
+  <span class="json-key">"status"</span>: <span class="json-string">"pending"</span>,
+  <span class="json-key">"message"</span>: <span class="json-string">"queued for processing"</span>,
+  <span class="json-key">"queue_position"</span>: <span class="json-number">3</span>
+}
+
+<span class="json-comment">// Worker will process in background</span>
+<span class="json-comment">// Result available via idempotency replay</span>`,
+                latency: 'Queue: 3 pending'
+            },
+            replay: {
+                cmd: 'curl -X POST http://localhost:8080/v1/score \\\n  -H "Content-Type: application/json" \\\n  -H "X-API-Key: fd_live_demo" \\\n  -H "X-Idempotency-Key: idem_001" \\\n  -d \'{"transaction_id":"tx_001","amount":5000}\'  # Duplicate!',
+                response: `<span class="json-comment">// Idempotent replay — 200 OK</span>
+<span class="json-comment">// Header: X-Idempotency-Replayed: true</span>
+{
+  <span class="json-key">"transaction_id"</span>: <span class="json-string">"tx_001"</span>,
+  <span class="json-key">"score"</span>: <span class="json-number">0.85</span>,
+  <span class="json-key">"decision"</span>: <span class="json-string">"block"</span>,
+  <span class="json-key">"_replayed"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"_cached_at"</span>: <span class="json-string">"2026-06-02T12:00:00Z"</span>
+}`,
+                latency: 'P95: 0.8ms (cached)'
+            }
+        };
+
+        function switchDemo(mode) {
+            // Reset decision badges
+            document.querySelectorAll('.decision-badge').forEach(b => b.classList.remove('active'));
+            
+            const btns = document.querySelectorAll('.demo-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-demo="${mode}"]`).classList.add('active');
+            
+            const scenario = demoScenarios[mode];
+            const cmdEl = document.getElementById('typing-cmd');
+            const responseEl = document.getElementById('demo-response');
+            const latencyEl = document.getElementById('demo-latency');
+            const scoreEl = document.getElementById('demo-score');
+            
+            // Typing animation
+            cmdEl.textContent = '';
+            responseEl.innerHTML = '<div class="json-block" style="opacity:0.5"><span class="json-comment">// Processing...</span></div>';
+            
+            let i = 0;
+            const typeInterval = setInterval(() => {
+                if (i < scenario.cmd.length) {
+                    cmdEl.textContent += scenario.cmd[i];
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                    setTimeout(() => {
+                        responseEl.innerHTML = `<div class="json-block">${scenario.response}</div>`;
+                        latencyEl.textContent = scenario.latency;
+                    }, 300);
+                }
+            }, 15);
+        }
+
+        // Stage details data
+        const stageDetails = {
+            client: {
+                title: 'Client — Входящий запрос',
+                content: `
+                    <p>Клиент отправляет POST запрос с JSON данными транзакции на endpoint <code>/v1/score</code>.</p>
+                    <p><strong>Обязательные поля:</strong></p>
+                    <ul>
+                        <li><code>transaction_id</code> — уникальный ID транзакции</li>
+                        <li><code>amount</code> — сумма в minor units (копейки)</li>
+                        <li><code>currency</code> — код валюты (RUB, USD, EUR)</li>
+                        <li><code>user_id</code> — ID пользователя</li>
+                        <li><code>timestamp</code> — ISO 8601 время</li>
+                    </ul>
+                    <p><strong>Опциональные поля:</strong> merchant, user_email, ip_address, country</p>
+                    <div class="code-block">curl -X POST http://localhost:8080/v1/score \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: your_key" \
+  -d '{"transaction_id": "tx_001", "amount": 5000}'</div>`
+            },
+            auth: {
+                title: 'Auth — Аутентификация',
+                content: `
+                    <p>Проверка API-ключа через SHA-256 хеш в таблице <code>api_keys</code>.</p>
+                    <p><strong>Process:</strong></p>
+                    <ul>
+                        <li>Извлечение X-API-Key из заголовка</li>
+                        <li>Хеширование: SHA-256(key)</li>
+                        <li>Lookup в PostgreSQL: api_keys → tenants</li>
+                        <li>Определение tenant_id для изоляции</li>
+                    </ul>
+                    <p><strong>Multi-tenancy (v1.2):</strong> Каждый tenant имеет изолированные ML-модели и правила.</p>
+                    <p><strong>Rate limiting:</strong> 70,000 req/min (~1167 RPS) через token bucket.</p>
+                    <div class="code-block">X-API-Key: fd_live_abc123
+→ SHA-256 hash
+→ SELECT tenant_id FROM api_keys WHERE api_key_hash = ?
+→ tenant_id = "acme_corp"</div>`
+            },
+            idempotency: {
+                title: 'Idempotency — Идемпотентность',
+                content: `
+                    <p>Защита от повторной обработки дубликатов запросов.</p>
+                    <p><strong>Redis Key Format:</strong> <code>idempotency:{tenant_id}:{idempotency_key}</code></p>
+                    <p><strong>Behavior:</strong></p>
+                    <ul>
+                        <li><strong>Cache HIT:</strong> Возврат кэшированного ответа + заголовок X-Idempotency-Replayed: true</li>
+                        <li><strong>Cache MISS:</strong> Продолжение обработки</li>
+                        <li><strong>TTL:</strong> 24 часа</li>
+                    </ul>
+                    <p><strong>Async replay:</strong> При повторном запросе до завершения worker'а возвращается status: "pending".</p>
+                    <div class="code-block">GET idempotency:acme_corp:idem_001
+→ HIT? Return cached response
+→ MISS? Continue to scoring</div>`
+            },
+            blacklist: {
+                title: 'Blacklist — Чёрный список',
+                content: `
+                    <p>Мгновенная блокировка без ML-скоринга.</p>
+                    <p><strong>Redis Key Format:</strong> <code>blacklist:{type}:{id}</code></p>
+                    <p><strong>Types:</strong></p>
+                    <ul>
+                        <li><code>user</code> — user_id</li>
+                        <li><code>email</code> — user_email</li>
+                        <li><code>ip</code> — ip_address</li>
+                        <li><code>card</code> — card_number hash</li>
+                    </ul>
+                    <p><strong>Action:</strong> Если найден → decision = "block" без ML-скоринга.</p>
+                    <div class="code-block">GET blacklist:user:user_123
+→ EXISTS? decision = "block"
+→ NOT EXISTS? Continue to ML</div>`
+            },
+            ml: {
+                title: 'ML Scoring — Машинное обучение',
+                content: `
+                    <p>Random Forest на Go без внешних зависимостей.</p>
+                    <p><strong>Pipeline:</strong></p>
+                    <ul>
+                        <li><strong>FeatureExtractor:</strong> 20 признаков (amount, velocity, geo_risk, etc.)</li>
+                        <li><strong>ModelSelector (v1.2):</strong> tenant → default → heuristic fallback</li>
+                        <li><strong>RandomForest:</strong> Итеративный обход деревьев (защита от stack overflow)</li>
+                        <li><strong>PlattScaler (v2.0):</strong> Калибровка вероятностей</li>
+                    </ul>
+                    <p><strong>Hot-reload:</strong> fsnotify следит за файлами моделей.</p>
+                    <p><strong>Template modes:</strong> fraud/safe/random для тестирования.</p>
+                    <div class="code-block">FeatureExtractor.Process(tx)
+  → [f1, f2, ..., f20]
+ModelSelector.GetModel(tenant_id)
+  → RandomForest.predict(features)
+  → raw_score = 0.85
+PlattScaler.Calibrate(raw_score)
+  → calibrated_score = 0.82</div>`
+            },
+            decision: {
+                title: 'Decision — Принятие решения',
+                content: `
+                    <p>Маппинг score → бизнес-решение.</p>
+                    <p><strong>Thresholds:</strong></p>
+                    <ul>
+                        <li><code>score < 0.5</code> → <span style="color:#34d399">ALLOW</span> — пропустить</li>
+                        <li><code>0.5 ≤ score < 0.8</code> → <span style="color:#ffd740">REVIEW</span> — ручная проверка</li>
+                        <li><code>score ≥ 0.8</code> → <span style="color:#ff5252">BLOCK</span> — заблокировать</li>
+                    </ul>
+                    <p><strong>Explainability (v2.0):</strong> SHAP-like feature contributions для каждого решения.</p>
+                    <p><strong>Dynamic risk rules:</strong> Дополнительные правила из <code>risk_rules.yaml</code>.</p>
+                    <div class="code-block">score = 0.85
+→ decision = "block"
+reasons: ["high_amount", "risky_merchant"]
+contributions: [{feature: "amount", value: 0.25}]</div>`
+            },
+            persist: {
+                title: 'Persist — Сохранение',
+                content: `
+                    <p>Сохранение результата для аудита и аналитики.</p>
+                    <p><strong>PostgreSQL:</strong></p>
+                    <ul>
+                        <li>Таблица <code>fraud_scores</code></li>
+                        <li>JSONB для <code>reasons</code> и <code>contributions</code></li>
+                        <li>Индексы по tenant_id, transaction_id, created_at</li>
+                    </ul>
+                    <p><strong>Redis cache:</strong></p>
+                    <ul>
+                        <li>Кэш ответа для idempotency replay</li>
+                        <li>TTL: 24 часа</li>
+                    </ul>
+                    <div class="code-block">INSERT INTO fraud_scores
+  (tenant_id, transaction_id, score, 
+   decision, reasons, created_at)
+VALUES (...)
+
+SET idempotency:{tenant}:{key} → response
+EXPIRE 86400</div>`
+            },
+            response: {
+                title: 'Response — Ответ клиенту',
+                content: `
+                    <p><strong>Sync mode (default):</strong></p>
+                    <ul>
+                        <li>HTTP 200 + полный результат</li>
+                        <li>Latency: P95 4.2ms (7x лучше целевого)</li>
+                    </ul>
+                    <p><strong>Async mode (worker_count > 0):</strong></p>
+                    <ul>
+                        <li>HTTP 202 + status: "pending"</li>
+                        <li>Worker обрабатывает в фоне</li>
+                        <li>Replay до завершения = pending</li>
+                    </ul>
+                    <p><strong>Headers:</strong></p>
+                    <ul>
+                        <li><code>X-Idempotency-Replayed: true</code> — при replay</li>
+                        <li><code>X-Request-Id</code> — трассируемость</li>
+                    </ul>
+                    <div class="code-block">// Sync response
+HTTP 200
+{"score": 0.85, "decision": "block", "latency_ms": 4.2}
+
+// Async response
+HTTP 202
+{"status": "pending", "message": "queued"}</div>`
+            }
+        };
+
+        function showStageDetail(stage) {
+            const panel = document.getElementById('flow-detail-panel');
+            const title = document.getElementById('detail-title');
+            const content = document.getElementById('detail-content');
+            const data = stageDetails[stage];
+            
+            if (data) {
+                title.textContent = data.title;
+                content.innerHTML = data.content;
+                panel.classList.add('is-active');
+                panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Pulse animation on the clicked stage
+                const stageEl = document.querySelector(`[data-stage="${stage}"]`);
+                if (stageEl) {
+                    stageEl.classList.add('is-pulsing');
+                    setTimeout(() => stageEl.classList.remove('is-pulsing'), 600);
+                }
+            }
+        }
+
+        // Flow simulation
+        async function simulateFlow(mode) {
+            const stages = ['client', 'auth', 'idempotency', 'blacklist', 'ml', 'decision', 'persist', 'response'];
+            const arrows = document.querySelectorAll('.fp-arrow');
+            const status = document.getElementById('flow-status');
+            
+            // Reset
+            stages.forEach(s => {
+                const el = document.querySelector(`[data-stage='${s}']`);
+                if (el) el.classList.remove('is-pulsing');
+            });
+            arrows.forEach(a => a.classList.remove('is-flowing'));
+            
+            status.innerHTML = `<span class="status-dot"></span>Running ${mode}...`;
+            
+            const delay = (ms) => new Promise(r => setTimeout(r, ms));
+            
+            for (let i = 0; i < stages.length; i++) {
+                // Skip blacklist in some modes
+                if (stages[i] === 'blacklist' && (mode === 'replay' || mode === 'async')) {
+                    continue;
+                }
+                
+                // Skip persist in replay mode (returns cached)
+                if (stages[i] === 'persist' && mode === 'replay') {
+                    continue;
+                }
+                
+                // Pulse current stage
+                const stageEl = document.querySelector(`[data-stage='${stages[i]}']`);
+                if (stageEl) {
+                    stageEl.classList.add('is-pulsing');
+                }
+                
+                // Flow arrow
+                if (i > 0 && arrows[i-1]) {
+                    arrows[i-1].classList.add('is-flowing');
+                }
+                
+                await delay(mode === 'async' ? 300 : 400);
+                
+                if (stageEl) {
+                    stageEl.classList.remove('is-pulsing');
+                }
+            }
+            
+            // Show result
+            if (mode === 'block') {
+                status.innerHTML = `<span class="status-dot" style="background:var(--accent-red)"></span>BLOCKED — score: 0.85`;
+            } else if (mode === 'replay') {
+                status.innerHTML = `<span class="status-dot" style="background:var(--accent-cyan)"></span>REPLAYED — X-Idempotency-Replayed: true`;
+            } else if (mode === 'async') {
+                status.innerHTML = `<span class="status-dot" style="background:var(--accent-purple)"></span>202 Accepted — queued for worker`;
+            } else {
+                status.innerHTML = `<span class="status-dot" style="background:var(--accent-green)"></span>200 OK — score: 0.25, decision: allow`;
+            }
+        }
+    </script>
+</body>
+</html>
