@@ -807,7 +807,7 @@
 
         .arch-item {
             padding: 1rem; border: 1px solid var(--grid-line);
-            background: var(--bg-card); overflow: hidden;
+            background: var(--bg-card); position: relative;
             transition: border-color 0.3s, transform 0.3s;
         }
 
@@ -955,11 +955,68 @@
         .compliance-item {
             display: flex; align-items: flex-start; gap: 0.75rem;
             padding: 1rem; border: 1px solid var(--grid-line);
-            background: var(--bg-card);
+            background: var(--bg-card); position: relative;
             transition: border-color 0.3s;
         }
 
         .compliance-item:hover { border-color: var(--accent-emerald); }
+
+        .compliance-tooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%; transform: translateX(-50%);
+            width: 280px;
+            padding: 14px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, rgba(15, 25, 40, 0.99), rgba(10, 18, 30, 0.99));
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.2);
+            pointer-events: none;
+            transform: translateX(-50%) translateY(8px) scale(0.95);
+        }
+
+        .compliance-item:hover .compliance-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .compliance-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .compliance-tooltip-title {
+            font-size: 0.82rem; font-weight: 700; color: #69f0ae;
+            margin-bottom: 8px;
+        }
+
+        .compliance-tooltip-desc {
+            font-size: 0.76rem; color: #b0c4de; line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .compliance-tooltip ul {
+            margin: 4px 0 0; padding-left: 14px;
+        }
+
+        .compliance-tooltip li {
+            font-size: 0.72rem; color: #c8dff4; margin-bottom: 2px;
+        }
+
+        .compliance-tooltip code {
+            display: block; margin-top: 8px;
+            padding: 6px 8px; background: rgba(0,0,0,0.4);
+            border-radius: 4px; font-size: 0.68rem; color: #80cbc4;
+        }
 
         .compliance-icon {
             flex-shrink: 0; width: 24px; height: 24px;
@@ -1038,161 +1095,54 @@
             font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;
         }
 
+        .author-projects {
+            display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+            margin-top: 0.75rem; font-size: 0.75rem;
+        }
+
+        .author-projects-label {
+            color: var(--text-muted);
+        }
+
+        .author-projects a {
+            color: var(--accent-orange); text-decoration: none;
+            padding: 0.15rem 0.5rem; border: 1px solid var(--grid-line);
+            transition: all 0.2s;
+        }
+
+        .author-projects a:hover {
+            border-color: var(--accent-orange); color: var(--text-bright);
+        }
+
+        .author-projects span:not(.author-projects-label) {
+            color: var(--text-muted);
+            padding: 0.15rem 0.5rem; border: 1px solid var(--grid-line);
+        }
+
         /* Footer */
         footer {
             margin-top: 2rem; padding: 2rem 0; border-top: 1px solid var(--grid-line);
         }
 
-        .footer-content {
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 1rem;
-        }
-
-        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1rem; }
         .footer-links a {
-            color: var(--accent-orange); text-decoration: none; font-size: 0.8rem;
+            color: var(--text-muted); text-decoration: none; font-size: 0.8rem;
             transition: color 0.2s;
         }
-        .footer-links a:hover { color: var(--text-bright); }
+        .footer-links a:hover { color: var(--accent-orange); }
 
-        .footer-link-icon {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+        .footer-built {
+            display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+            font-size: 0.75rem; color: var(--text-muted);
         }
-
-        .footer-link-icon svg {
-            width: 16px;
-            height: 16px;
-            opacity: 0.7;
-            transition: opacity 0.2s;
+        .footer-built a {
+            color: var(--accent-orange); text-decoration: none; transition: color 0.2s;
         }
-
-        .footer-link-icon:hover svg {
-            opacity: 1;
-        }
-
-        .main-site-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 230, 118, 0.1));
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            border-radius: 10px;
-            color: var(--accent-cyan);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-top: 16px;
-            letter-spacing: 0.02em;
-        }
-
-        .main-site-btn:hover {
-            background: linear-gradient(135deg, rgba(0, 229, 255, 0.18), rgba(0, 230, 118, 0.18));
-            border-color: rgba(0, 229, 255, 0.6);
-            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.25), 0 0 25px rgba(0, 229, 255, 0.15);
-            transform: translateY(-2px);
-            color: #4dd0e1;
-        }
-
-        .main-site-btn:active {
-            transform: translateY(0);
-        }
-
-        .main-site-btn svg {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.2s;
-        }
-
-        .main-site-btn:hover svg {
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-        .more-projects {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--grid-line);
-        }
-
-        .more-projects-title {
-            font-size: 0.68rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
-        }
-
-        .more-projects-links {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--grid-line);
-            border-radius: 6px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.75rem;
-            transition: all 0.2s;
-        }
-
-        .project-link:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            background: rgba(0, 229, 255, 0.05);
-            transform: translateY(-1px);
-        }
-
-        .project-link svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .telegram-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(255, 145, 0, 0.08);
-            border: 1px solid rgba(255, 145, 0, 0.3);
-            border-radius: 8px;
-            color: var(--accent-orange);
-            text-decoration: none;
-            font-size: 0.82rem;
-            font-weight: 500;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-top: 12px;
-        }
-
-        .telegram-btn:hover {
-            background: rgba(255, 145, 0, 0.15);
-            border-color: rgba(255, 145, 0, 0.6);
-            box-shadow: 0 4px 16px rgba(255, 145, 0, 0.25), 0 0 20px rgba(255, 145, 0, 0.15);
-            transform: translateY(-2px);
-            color: #ffb74d;
-        }
-
-        .telegram-btn:active {
-            transform: translateY(0);
-        }
-
-        .telegram-btn svg {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.2s;
-        }
-
-        .telegram-btn:hover svg {
-            transform: scale(1.1);
+        .footer-built a:hover { color: var(--text-bright); }
+        .footer-built .heart { color: var(--accent-red); animation: heartbeat 1.5s ease-in-out infinite; }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
         }
 
         .footer-copy {
@@ -1243,8 +1193,6 @@
             .demo-controls { flex-wrap: wrap; }
             .demo-btn { font-size: 0.6rem; padding: 3px 6px; }
             .terminal-title { display: none; }
-            .telegram-btn { width: 100%; justify-content: center; }
-            .main-site-btn { width: 100%; justify-content: center; }
             .footer-links { flex-wrap: wrap; gap: 1rem; }
         }
 
@@ -1609,9 +1557,99 @@
         /* Async mode */
         .async-badge {
             display: inline-block; padding: 0.2rem 0.5rem;
-            background: rgba(179, 136, 255, 0.15); color: var(--accent-purple);
+            background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan);
             font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
             margin-left: 0.5rem;
+        }
+
+        /* Visitor counter */
+        .counter-wrap {
+            display: inline-flex;
+            align-items: center;
+            vertical-align: middle;
+            height: 30px;
+        }
+        .counter-ring {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            position: relative;
+            background: rgba(0, 229, 255, 0.04);
+            border: 1.5px solid rgba(0, 229, 255, 0.2);
+            box-shadow: 0 0 6px rgba(0, 229, 255, 0.08), inset 0 0 6px rgba(0, 229, 255, 0.02);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .counter-ring.pop {
+            animation: ringPulse 0.4s ease-out;
+            border-color: rgba(0, 229, 255, 0.7);
+            box-shadow: 0 0 14px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.06);
+        }
+        .counter-ring.idle {
+            animation: ringBreathe 3s ease-in-out infinite;
+        }
+        @keyframes ringPulse {
+            0% {
+                box-shadow:
+                    0 0 0 0 rgba(0, 229, 255, 0.5),
+                    0 0 0 0 rgba(0, 229, 255, 0.2),
+                    0 0 14px rgba(0, 229, 255, 0.3);
+            }
+            70% {
+                box-shadow:
+                    0 0 0 10px rgba(0, 229, 255, 0),
+                    0 0 0 18px rgba(0, 229, 255, 0),
+                    0 0 14px rgba(0, 229, 255, 0.3);
+            }
+            100% {
+                box-shadow:
+                    0 0 0 12px rgba(0, 229, 255, 0),
+                    0 0 0 22px rgba(0, 229, 255, 0),
+                    0 0 14px rgba(0, 229, 255, 0.3);
+            }
+        }
+        @keyframes ringBreathe {
+            0%, 100% {
+                border-color: rgba(0, 229, 255, 0.2);
+                box-shadow: 0 0 6px rgba(0, 229, 255, 0.08), inset 0 0 6px rgba(0, 229, 255, 0.02);
+            }
+            50% {
+                border-color: rgba(0, 229, 255, 0.4);
+                box-shadow: 0 0 12px rgba(0, 229, 255, 0.2), inset 0 0 10px rgba(0, 229, 255, 0.05);
+            }
+        }
+        .counter-digit {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            color: #00e5ff;
+            text-shadow:
+                0 0 4px rgba(0, 229, 255, 0.5),
+                0 0 12px rgba(0, 229, 255, 0.2);
+            letter-spacing: 0.3px;
+            text-align: center;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .counter-digit.pop {
+            animation: digitPop 0.25s ease-out;
+        }
+        @keyframes digitPop {
+            0% { transform: scale(1.35); text-shadow: 0 0 16px rgba(0,229,255,0.9), 0 0 40px rgba(0,229,255,0.4); }
+            50% { transform: scale(0.92); }
+            100% { transform: scale(1); text-shadow: 0 0 4px rgba(0,229,255,0.5), 0 0 12px rgba(0,229,255,0.2); }
+        }
+        .counter-digit.idle {
+            animation: digitBreathe 3s ease-in-out infinite;
+        }
+        @keyframes digitBreathe {
+            0%, 100% { text-shadow: 0 0 4px rgba(0,229,255,0.5), 0 0 12px rgba(0,229,255,0.2); }
+            50% { text-shadow: 0 0 8px rgba(0,229,255,0.7), 0 0 24px rgba(0,229,255,0.3); }
+        }
+        .counter-digit.loading {
+            opacity: 0.35;
         }
     </style>
 </head>
@@ -2068,12 +2106,39 @@ score >= 0.8 → <span style="color:#ff5252;font-weight:700">BLOCK</span></div>
                             <strong>152-ФЗ</strong>
                             PII masking в логах, защита персональных данных
                         </div>
+                        <div class="compliance-tooltip">
+                            <div class="compliance-tooltip-title">152-ФЗ — Защита персональных данных</div>
+                            <div class="compliance-tooltip-desc">Полное соответствие российскому законодательству о защите персональных данных.</div>
+                            <ul>
+                                <li><strong>PII masking</strong> — email, телефон, номер карты маскируются в логах</li>
+                                <li><strong>Data minimization</strong> — собираются только необходимые данные</li>
+                                <li><strong>Consent tracking</strong> — аудит обработки ПДн</li>
+                                <li><strong>Breach notification</strong> — уведомление при утечке данных</li>
+                            </ul>
+                            <code>email: u***@g****.com
+phone: +7 (9***) ***-**-**</code>
+                        </div>
                     </div>
                     <div class="compliance-item">
                         <div class="compliance-icon">✓</div>
                         <div class="compliance-text">
                             <strong>TLS/HTTPS</strong>
                             Auto Let's Encrypt,强制 HTTPS
+                        </div>
+                        <div class="compliance-tooltip">
+                            <div class="compliance-tooltip-title">TLS/HTTPS — Шифрование транспорта</div>
+                            <div class="compliance-tooltip-desc">Автоматическое шифрование всех HTTP-соединений.</div>
+                            <ul>
+                                <li><strong>Let's Encrypt</strong> — автоматические SSL-сертификаты</li>
+                                <li><strong>HSTS</strong> — HTTP Strict Transport Security</li>
+                                <li><strong>HTTP → HTTPS</strong> — принудительный редирект</li>
+                                <li><strong>TLS 1.3</strong> — поддержка актуальной версии протокола</li>
+                            </ul>
+                            <code>tls:
+  enabled: true
+  cert_file: ""
+  key_file: ""
+  # Auto Let's Encrypt if empty</code>
                         </div>
                     </div>
                     <div class="compliance-item">
@@ -2082,12 +2147,40 @@ score >= 0.8 → <span style="color:#ff5252;font-weight:700">BLOCK</span></div>
                             <strong>API Authentication</strong>
                             X-API-Key header, tenant resolution
                         </div>
+                        <div class="compliance-tooltip">
+                            <div class="compliance-tooltip-title">API Authentication — Аутентификация</div>
+                            <div class="compliance-tooltip-desc">SHA-256 хеширование API-ключей с определением tenant.</div>
+                            <ul>
+                                <li><strong>SHA-256 hashing</strong> — ключи не хранятся в открытом виде</li>
+                                <li><strong>Tenant resolution</strong> — автоматическое определение tenant_id</li>
+                                <li><strong>Key rotation</strong> — поддержка ротации ключей</li>
+                                <li><strong>Per-tenant limits</strong> — индивидуальные лимиты</li>
+                            </ul>
+                            <code>X-API-Key: fd_live_abc123
+→ SHA-256 hash
+→ SELECT tenant_id FROM api_keys
+WHERE api_key_hash = ?</code>
+                        </div>
                     </div>
                     <div class="compliance-item">
                         <div class="compliance-icon">✓</div>
                         <div class="compliance-text">
                             <strong>Rate Limiting</strong>
                             70,000 req/min (~1167 RPS)
+                        </div>
+                        <div class="compliance-tooltip">
+                            <div class="compliance-tooltip-title">Rate Limiting — Ограничение запросов</div>
+                            <div class="compliance-tooltip-desc">Token bucket алгоритм для защиты от DDoS и brute-force.</div>
+                            <ul>
+                                <li><strong>Token bucket</strong> — плавное ограничение без скачков</li>
+                                <li><strong>Per-tenant</strong> — индивидуальные лимиты для каждого tenant</li>
+                                <li><strong>Redis-backed</strong> — распределённый счётчик</li>
+                                <li><strong>429 Too Many Requests</strong> — стандартный HTTP-код</li>
+                            </ul>
+                            <code>rate_limit:
+  enabled: true
+  requests_per_minute: 70000
+  burst: 1000</code>
                         </div>
                     </div>
                     <div class="compliance-item">
@@ -2096,12 +2189,39 @@ score >= 0.8 → <span style="color:#ff5252;font-weight:700">BLOCK</span></div>
                             <strong>Idempotency</strong>
                             Redis cache, tenant-scoped keys
                         </div>
+                        <div class="compliance-tooltip">
+                            <div class="compliance-tooltip-title">Idempotency — Идемпотентность</div>
+                            <div class="compliance-tooltip-desc">Защита от повторной обработки дубликатов запросов.</div>
+                            <ul>
+                                <li><strong>Redis cache</strong> — кэш ответов по X-Idempotency-Key</li>
+                                <li><strong>Tenant-scoped</strong> — ключи изолированы между tenant</li>
+                                <li><strong>TTL 24h</strong> — автоматическое истечение кэша</li>
+                                <li><strong>Replay header</strong> — X-Idempotency-Replayed: true</li>
+                            </ul>
+                            <code>GET idempotency:{tenant}:{key}
+→ HIT? Return cached response
+→ MISS? Continue to scoring</code>
+                        </div>
                     </div>
                     <div class="compliance-item">
                         <div class="compliance-icon">✓</div>
                         <div class="compliance-text">
                             <strong>Audit Trail</strong>
                             PostgreSQL persistence, transaction_id tracking
+                        </div>
+                        <div class="compliance-tooltip">
+                            <div class="compliance-tooltip-title">Audit Trail — Аудит операций</div>
+                            <div class="compliance-tooltip-desc">Полная трассируемость каждого решения о скоринге.</div>
+                            <ul>
+                                <li><strong>PostgreSQL</strong> — JSONB для reasons и contributions</li>
+                                <li><strong>transaction_id</strong> — уникальный трекинг каждой транзакции</li>
+                                <li><strong>Indeces</strong> — по tenant_id, created_at для аналитики</li>
+                                <li><strong>Export</strong> — CSV/JSON выгрузка для отчётов</li>
+                            </ul>
+                            <code>INSERT INTO fraud_scores
+  (tenant_id, transaction_id, score,
+   decision, reasons, created_at)
+VALUES (...)</code>
                         </div>
                     </div>
                 </div>
@@ -2232,7 +2352,15 @@ score >= 0.8 → <span style="color:#ff5252;font-weight:700">BLOCK</span></div>
                     <div class="author-info">
                         <div class="author-name">Юсупов Роберт Рахимович</div>
                         <div class="author-title">Senior Backend Engineer</div>
-                        <div class="author-exp">18+ лет опыта · Go · PHP · ML · High-load</div>
+                        <div class="author-exp">18+ лет в разработке · Go/PHP · AI · High-load backend</div>
+                        <div class="author-projects">
+                            <span class="author-projects-label">Production-проекты:</span>
+                            <a href="https://turkprogrammer.github.io/sql-top/" target="_blank" rel="noopener noreferrer">SQL-Top</a>
+                            <a href="https://turkprogrammer.github.io/logt/" target="_blank" rel="noopener noreferrer">LogT</a>
+                            <a href="https://turkprogrammer.github.io/mt/" target="_blank" rel="noopener noreferrer">MT</a>
+                            <span>Geo-mapping</span>
+                            <span>Stable ID</span>
+                        </div>
                     </div>
                     <div class="author-links">
                         <a href="https://github.com/turkprogrammer" target="_blank" rel="noopener" class="github-link">GitHub →</a>
@@ -2241,56 +2369,27 @@ score >= 0.8 → <span style="color:#ff5252;font-weight:700">BLOCK</span></div>
             </section>
 
             <footer role="contentinfo">
-                <div class="footer-content">
-                    <div>
-                        <div style="font-size: 0.85rem; color: var(--text-bright);">Fraud Detection Engine</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Антифрод система на Golang | 152-ФЗ · Multi-tenancy · SHAP</div>
-                        <a class="main-site-btn" href="https://yusupov-tech.ru" target="_blank" rel="noopener noreferrer" aria-label="Портфолио">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M2 12h20"></path>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                            </svg>
-                            yusupov-tech.ru
-                        </a>
-                        <a class="telegram-btn" href="https://t.me/turanellervarolsun" target="_blank" rel="noopener noreferrer" aria-label="Telegram @turanellervarolsun">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M21.6 4.4c.3-1.1-.7-2-1.8-1.7L3.7 8.1c-1.2.4-1.2 2.1 0 2.4l4.3 1.4 1.6 5.1c.3 1 1.6 1.4 2.4.7l2.4-2.1 4.2 3.1c.8.6 1.9.2 2.2-.8l2.8-13.5Zm-12.6 8.1 8.7-5.3-6.8 6.7-.3 3-1.6-4.4Z"></path>
-                            </svg>
-                            @turanellervarolsun
-                        </a>
-                        <div class="more-projects">
-                            <div class="more-projects-title">Ещё проекты</div>
-                            <div class="more-projects-links">
-                                <a class="project-link" href="https://turkprogrammer.github.io/logt/" target="_blank" rel="noopener">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                    LogT — TUI Log Viewer
-                                </a>
-                                <a class="project-link" href="https://turkprogrammer.github.io/mt/" target="_blank" rel="noopener">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-                                    MT — Go Runtime Trade-off
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer-links">
-                        <a class="footer-link-icon" href="https://github.com/turkprogrammer/fraud-engine-docs" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                            GitHub
-                        </a>
-                        <a class="footer-link-icon" href="https://github.com/turkprogrammer/fraud-engine-docs/blob/main/README.md" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                            Документация
-                        </a>
-                        <a class="footer-link-icon" href="https://github.com/turkprogrammer/fraud-engine-docs/issues" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                            Обратная связь
-                        </a>
-                    </div>
+                <div class="footer-links">
+                    <a href="https://github.com/turkprogrammer/fraud-engine-docs" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/turkprogrammer/fraud-engine-docs/blob/main/README.md" target="_blank" rel="noopener noreferrer">Documentation</a>
+                    <a href="https://github.com/turkprogrammer/fraud-engine-docs/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+                    <a href="https://yusupov-tech.ru/" target="_blank" rel="noopener noreferrer">yusupov-tech.ru</a>
                 </div>
-                <div class="footer-copy">
-                    Go, PostgreSQL, Redis — зарегистрированные товарные знаки. Fraud Detection Engine не связан с Google.
-                    <br>Licensed under Apache License 2.0 · © 2024-2026 turkprogrammer
+                <div class="footer-built">
+                    <span>Built with</span>
+                    <span class="heart" aria-hidden="true">♥</span>
+                    <a href="https://github.com/turkprogrammer" target="_blank" rel="noopener noreferrer">turkprogrammer</a>
+                    <span style="margin:0 0.5rem;color:var(--text-muted)">·</span>
+                    <a href="https://t.me/turanellervarolsun" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.35rem;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 4.4c.3-1.1-.7-2-1.8-1.7L3.7 8.1c-1.2.4-1.2 2.1 0 2.4l4.3 1.4 1.6 5.1c.3 1 1.6 1.4 2.4.7l2.4-2.1 4.2 3.1c.8.6 1.9.2 2.2-.8l2.8-13.5Zm-12.6 8.1 8.7-5.3-6.8 6.7-.3 3-1.6-4.4Z"/></svg>
+                        @turanellervarolsun
+                    </a>
+                    <span style="margin:0 0.5rem;color:var(--text-muted)">·</span>
+                    <span id="visitor-counter" class="counter-wrap" title="Visits">
+                        <span class="counter-ring" id="counter-ring">
+                            <span class="counter-digit loading" id="counter-display"></span>
+                        </span>
+                    </span>
                 </div>
             </footer>
         </main>
@@ -2842,6 +2941,54 @@ HTTP 202
                 status.innerHTML = `<span class="status-dot" style="background:var(--accent-green)"></span>200 OK — score: 0.25, decision: allow`;
             }
         }
+
+        // Live Visitor Counter (localStorage)
+        (function() {
+            const display = document.getElementById('counter-display');
+            const ring = document.getElementById('counter-ring');
+            if (!display || !ring) return;
+
+            const key = 'fraud_engine_visits';
+            const prev = parseInt(localStorage.getItem(key) || '0');
+            const target = prev + 1;
+            localStorage.setItem(key, target);
+
+            display.textContent = '\u22EF\u22EF\u22EF';
+
+            function animate() {
+                display.classList.remove('loading');
+                ring.classList.remove('loading');
+                const steps = Math.min(target || 1, 20);
+                const stepMs = Math.max(16, 500 / steps);
+
+                function tick(i) {
+                    if (i > steps) {
+                        display.textContent = target.toLocaleString();
+                        display.classList.add('idle');
+                        ring.classList.add('idle');
+                        return;
+                    }
+                    const current = Math.round(target * i / steps);
+                    display.textContent = current.toLocaleString();
+                    if (i % 3 === 0 || i === steps) {
+                        display.classList.remove('pop');
+                        ring.classList.remove('pop');
+                        void display.offsetWidth;
+                        void ring.offsetWidth;
+                        display.classList.add('pop');
+                        ring.classList.add('pop');
+                    }
+                    setTimeout(function() { tick(i + 1); }, stepMs);
+                }
+                tick(1);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', animate);
+            } else {
+                animate();
+            }
+        })();
     </script>
 </body>
 </html>
